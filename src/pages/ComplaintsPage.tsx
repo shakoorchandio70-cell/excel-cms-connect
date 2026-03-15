@@ -329,7 +329,7 @@ function ComplaintForm({
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label>Category</Label>
+          <Label>Complaint Type</Label>
           <Select value={form.category} onValueChange={(v) => setForm({ ...form, category: v })}>
             <SelectTrigger><SelectValue /></SelectTrigger>
             <SelectContent>
@@ -338,14 +338,23 @@ function ComplaintForm({
           </Select>
         </div>
         <div className="space-y-2">
-          <Label>Priority</Label>
-          <Select value={form.priority} onValueChange={(v) => setForm({ ...form, priority: v })}>
+          <Label>Section</Label>
+          <Select value={form.section} onValueChange={(v) => setForm({ ...form, section: v })}>
             <SelectTrigger><SelectValue /></SelectTrigger>
             <SelectContent>
-              {PRIORITIES.map((p) => <SelectItem key={p} value={p}>{p}</SelectItem>)}
+              {SECTIONS.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
             </SelectContent>
           </Select>
         </div>
+      </div>
+      <div className="space-y-2">
+        <Label>Priority</Label>
+        <Select value={form.priority} onValueChange={(v) => setForm({ ...form, priority: v })}>
+          <SelectTrigger><SelectValue /></SelectTrigger>
+          <SelectContent>
+            {PRIORITIES.map((p) => <SelectItem key={p} value={p}>{p}</SelectItem>)}
+          </SelectContent>
+        </Select>
       </div>
       {showStatus && (
         <div className="space-y-2">

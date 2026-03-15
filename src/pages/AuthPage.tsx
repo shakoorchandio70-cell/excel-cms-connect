@@ -61,7 +61,7 @@ const AuthPage = () => {
             <ShieldCheck className="h-7 w-7 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-foreground">CMS Portal</h1>
+            <h1 className="text-2xl font-bold text-foreground">CATI E&M</h1>
             <p className="text-sm text-muted-foreground">Complaint Management System</p>
           </div>
         </div>
