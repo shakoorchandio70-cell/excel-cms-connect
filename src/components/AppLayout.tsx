@@ -30,7 +30,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
               <ShieldCheck className="h-5 w-5 text-sidebar-primary-foreground" />
             </div>
             <div>
-              <h2 className="font-semibold text-sm text-sidebar-foreground">CMS Portal</h2>
+              <h2 className="font-semibold text-sm text-sidebar-foreground">CATI E&M</h2>
               <p className="text-xs text-sidebar-foreground/60">Complaint Management</p>
             </div>
           </div>

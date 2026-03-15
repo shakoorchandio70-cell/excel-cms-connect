@@ -31,7 +31,8 @@ type Complaint = {
   created_by: string;
 };
 
-const CATEGORIES = ["General", "Service", "Product", "Billing", "Technical", "Other"];
+const CATEGORIES = ["AC not working", "Bulb replacement", "Fan not working", "Electrical fault", "Plumbing issue", "Other"];
+const SECTIONS = ["ANS ATS", "ANS ATSEP", "APS ES", "APS RFFS"];
 const PRIORITIES = ["Low", "Medium", "High", "Critical"];
 const STATUSES = ["Open", "In Progress", "Resolved", "Closed"];
 
@@ -224,8 +225,9 @@ const ComplaintsPage = () => {
                   <TableRow>
                     <TableHead>ID</TableHead>
                     <TableHead>Title</TableHead>
-                    <TableHead>Category</TableHead>
-                    <TableHead>Priority</TableHead>
+                     <TableHead>Category</TableHead>
+                     <TableHead>Section</TableHead>
+                     <TableHead>Priority</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Complainant</TableHead>
                     <TableHead>Date</TableHead>
@@ -238,6 +240,7 @@ const ComplaintsPage = () => {
                       <TableCell className="font-mono text-xs text-muted-foreground">{c.complaint_number}</TableCell>
                       <TableCell className="font-medium max-w-[200px] truncate">{c.title}</TableCell>
                       <TableCell className="text-sm">{c.category}</TableCell>
+                      <TableCell className="text-sm">{(c as any).section || "—"}</TableCell>
                       <TableCell>
                         <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
                           c.priority === "Critical" ? "status-critical" :
@@ -299,7 +302,8 @@ function ComplaintForm({
   const [form, setForm] = useState({
     title: initial?.title || "",
     description: initial?.description || "",
-    category: initial?.category || "General",
+    category: initial?.category || "AC not working",
+    section: (initial as any)?.section || "ANS ATS",
     priority: initial?.priority || "Medium",
     status: initial?.status || "Open",
     complainant_name: initial?.complainant_name || "",
@@ -325,7 +329,7 @@ function ComplaintForm({
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label>Category</Label>
+          <Label>Complaint Type</Label>
           <Select value={form.category} onValueChange={(v) => setForm({ ...form, category: v })}>
             <SelectTrigger><SelectValue /></SelectTrigger>
             <SelectContent>
@@ -334,14 +338,23 @@ function ComplaintForm({
           </Select>
         </div>
         <div className="space-y-2">
-          <Label>Priority</Label>
-          <Select value={form.priority} onValueChange={(v) => setForm({ ...form, priority: v })}>
+          <Label>Section</Label>
+          <Select value={form.section} onValueChange={(v) => setForm({ ...form, section: v })}>
             <SelectTrigger><SelectValue /></SelectTrigger>
             <SelectContent>
-              {PRIORITIES.map((p) => <SelectItem key={p} value={p}>{p}</SelectItem>)}
+              {SECTIONS.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
             </SelectContent>
           </Select>
         </div>
+      </div>
+      <div className="space-y-2">
+        <Label>Priority</Label>
+        <Select value={form.priority} onValueChange={(v) => setForm({ ...form, priority: v })}>
+          <SelectTrigger><SelectValue /></SelectTrigger>
+          <SelectContent>
+            {PRIORITIES.map((p) => <SelectItem key={p} value={p}>{p}</SelectItem>)}
+          </SelectContent>
+        </Select>
       </div>
       {showStatus && (
         <div className="space-y-2">
