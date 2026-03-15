@@ -31,7 +31,8 @@ type Complaint = {
   created_by: string;
 };
 
-const CATEGORIES = ["General", "Service", "Product", "Billing", "Technical", "Other"];
+const CATEGORIES = ["AC not working", "Bulb replacement", "Fan not working", "Electrical fault", "Plumbing issue", "Other"];
+const SECTIONS = ["ANS ATS", "ANS ATSEP", "APS ES", "APS RFFS"];
 const PRIORITIES = ["Low", "Medium", "High", "Critical"];
 const STATUSES = ["Open", "In Progress", "Resolved", "Closed"];
 
