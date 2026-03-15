@@ -240,6 +240,7 @@ const ComplaintsPage = () => {
                       <TableCell className="font-mono text-xs text-muted-foreground">{c.complaint_number}</TableCell>
                       <TableCell className="font-medium max-w-[200px] truncate">{c.title}</TableCell>
                       <TableCell className="text-sm">{c.category}</TableCell>
+                      <TableCell className="text-sm">{(c as any).section || "—"}</TableCell>
                       <TableCell>
                         <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
                           c.priority === "Critical" ? "status-critical" :
