@@ -225,8 +225,9 @@ const ComplaintsPage = () => {
                   <TableRow>
                     <TableHead>ID</TableHead>
                     <TableHead>Title</TableHead>
-                    <TableHead>Category</TableHead>
-                    <TableHead>Priority</TableHead>
+                     <TableHead>Category</TableHead>
+                     <TableHead>Section</TableHead>
+                     <TableHead>Priority</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Complainant</TableHead>
                     <TableHead>Date</TableHead>
