@@ -302,7 +302,8 @@ function ComplaintForm({
   const [form, setForm] = useState({
     title: initial?.title || "",
     description: initial?.description || "",
-    category: initial?.category || "General",
+    category: initial?.category || "AC not working",
+    section: (initial as any)?.section || "ANS ATS",
     priority: initial?.priority || "Medium",
     status: initial?.status || "Open",
     complainant_name: initial?.complainant_name || "",
