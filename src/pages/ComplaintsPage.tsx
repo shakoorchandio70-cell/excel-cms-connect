@@ -59,14 +59,15 @@ const ComplaintsPage = () => {
       const { error } = await supabase.from("complaints").insert({
         title: data.title!,
         description: data.description,
-        category: data.category || "General",
+        category: data.category || "AC not working",
+        section: data.section || "ANS ATS",
         priority: data.priority || "Medium",
         complainant_name: data.complainant_name,
         complainant_email: data.complainant_email,
         complainant_phone: data.complainant_phone,
         complaint_number: "",
         created_by: user!.id,
-      });
+      } as any);
       if (error) throw error;
     },
     onSuccess: () => {
