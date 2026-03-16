@@ -20,6 +20,7 @@ type Complaint = {
   title: string;
   description: string | null;
   category: string;
+  section: string;
   priority: string;
   status: string;
   complainant_name: string | null;
