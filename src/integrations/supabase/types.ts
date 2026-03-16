@@ -29,6 +29,7 @@ export type Database = {
           priority: string
           resolution_notes: string | null
           resolved_at: string | null
+          section: string | null
           status: string
           title: string
           updated_at: string
@@ -47,6 +48,7 @@ export type Database = {
           priority?: string
           resolution_notes?: string | null
           resolved_at?: string | null
+          section?: string | null
           status?: string
           title: string
           updated_at?: string
@@ -65,6 +67,7 @@ export type Database = {
           priority?: string
           resolution_notes?: string | null
           resolved_at?: string | null
+          section?: string | null
           status?: string
           title?: string
           updated_at?: string
