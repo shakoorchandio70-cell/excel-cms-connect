@@ -84,6 +84,7 @@ const ComplaintsPage = () => {
         title: data.title,
         description: data.description,
         category: data.category,
+        section: data.section,
         priority: data.priority,
         status: data.status,
         complainant_name: data.complainant_name,
@@ -91,7 +92,7 @@ const ComplaintsPage = () => {
         complainant_phone: data.complainant_phone,
         resolution_notes: data.resolution_notes,
         resolved_at: data.status === "Resolved" ? new Date().toISOString() : null,
-      }).eq("id", data.id);
+      } as any).eq("id", data.id);
       if (error) throw error;
     },
     onSuccess: () => {
