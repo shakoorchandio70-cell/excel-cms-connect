@@ -20,6 +20,7 @@ type Complaint = {
   title: string;
   description: string | null;
   category: string;
+  section: string;
   priority: string;
   status: string;
   complainant_name: string | null;
@@ -58,14 +59,15 @@ const ComplaintsPage = () => {
       const { error } = await supabase.from("complaints").insert({
         title: data.title!,
         description: data.description,
-        category: data.category || "General",
+        category: data.category || "AC not working",
+        section: data.section || "ANS ATS",
         priority: data.priority || "Medium",
         complainant_name: data.complainant_name,
         complainant_email: data.complainant_email,
         complainant_phone: data.complainant_phone,
         complaint_number: "",
         created_by: user!.id,
-      });
+      } as any);
       if (error) throw error;
     },
     onSuccess: () => {
@@ -82,6 +84,7 @@ const ComplaintsPage = () => {
         title: data.title,
         description: data.description,
         category: data.category,
+        section: data.section,
         priority: data.priority,
         status: data.status,
         complainant_name: data.complainant_name,
@@ -89,7 +92,7 @@ const ComplaintsPage = () => {
         complainant_phone: data.complainant_phone,
         resolution_notes: data.resolution_notes,
         resolved_at: data.status === "Resolved" ? new Date().toISOString() : null,
-      }).eq("id", data.id);
+      } as any).eq("id", data.id);
       if (error) throw error;
     },
     onSuccess: () => {
@@ -240,7 +243,7 @@ const ComplaintsPage = () => {
                       <TableCell className="font-mono text-xs text-muted-foreground">{c.complaint_number}</TableCell>
                       <TableCell className="font-medium max-w-[200px] truncate">{c.title}</TableCell>
                       <TableCell className="text-sm">{c.category}</TableCell>
-                      <TableCell className="text-sm">{(c as any).section || "—"}</TableCell>
+                      <TableCell className="text-sm">{c.section || "—"}</TableCell>
                       <TableCell>
                         <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
                           c.priority === "Critical" ? "status-critical" :
@@ -303,7 +306,7 @@ function ComplaintForm({
     title: initial?.title || "",
     description: initial?.description || "",
     category: initial?.category || "AC not working",
-    section: (initial as any)?.section || "ANS ATS",
+    section: initial?.section || "ANS ATS",
     priority: initial?.priority || "Medium",
     status: initial?.status || "Open",
     complainant_name: initial?.complainant_name || "",

@@ -1,0 +1,1 @@
+ALTER TABLE public.complaints ADD COLUMN section text DEFAULT 'ANS ATS';
