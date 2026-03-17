@@ -106,6 +106,12 @@
   .status-closed {
     @apply bg-[hsl(var(--status-closed)/0.12)] text-[hsl(var(--status-closed))];
   }
+  .status-completed {
+    @apply bg-[hsl(var(--status-closed)/0.12)] text-[hsl(var(--status-closed))];
+  }
+  .status-reopened {
+    @apply bg-[hsl(var(--status-critical)/0.12)] text-[hsl(var(--status-critical))];
+  }
   .status-critical {
     @apply bg-[hsl(var(--status-critical)/0.12)] text-[hsl(var(--status-critical))];
   }
