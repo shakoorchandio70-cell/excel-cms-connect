@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       complaints: {
         Row: {
+          assigned_at: string | null
           assigned_to: string | null
           category: string
           complainant_email: string | null
@@ -26,7 +27,11 @@ export type Database = {
           created_by: string
           description: string | null
           id: string
+          last_updated_at: string | null
+          last_updated_by: string | null
           priority: string
+          reopen_count: number | null
+          reopened_at: string | null
           resolution_notes: string | null
           resolved_at: string | null
           section: string | null
@@ -35,6 +40,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          assigned_at?: string | null
           assigned_to?: string | null
           category?: string
           complainant_email?: string | null
@@ -45,7 +51,11 @@ export type Database = {
           created_by: string
           description?: string | null
           id?: string
+          last_updated_at?: string | null
+          last_updated_by?: string | null
           priority?: string
+          reopen_count?: number | null
+          reopened_at?: string | null
           resolution_notes?: string | null
           resolved_at?: string | null
           section?: string | null
@@ -54,6 +64,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          assigned_at?: string | null
           assigned_to?: string | null
           category?: string
           complainant_email?: string | null
@@ -64,7 +75,11 @@ export type Database = {
           created_by?: string
           description?: string | null
           id?: string
+          last_updated_at?: string | null
+          last_updated_by?: string | null
           priority?: string
+          reopen_count?: number | null
+          reopened_at?: string | null
           resolution_notes?: string | null
           resolved_at?: string | null
           section?: string | null
@@ -73,6 +88,47 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      feedback: {
+        Row: {
+          action: string
+          comment: string | null
+          complaint_id: string
+          id: string
+          rating: number | null
+          reopen_reason: string | null
+          submitted_at: string | null
+          submitted_by: string
+        }
+        Insert: {
+          action: string
+          comment?: string | null
+          complaint_id: string
+          id?: string
+          rating?: number | null
+          reopen_reason?: string | null
+          submitted_at?: string | null
+          submitted_by: string
+        }
+        Update: {
+          action?: string
+          comment?: string | null
+          complaint_id?: string
+          id?: string
+          rating?: number | null
+          reopen_reason?: string | null
+          submitted_at?: string | null
+          submitted_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "feedback_complaint_id_fkey"
+            columns: ["complaint_id"]
+            isOneToOne: false
+            referencedRelation: "complaints"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
