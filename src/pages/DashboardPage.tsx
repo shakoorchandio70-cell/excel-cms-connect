@@ -92,6 +92,15 @@ const DashboardPage = () => {
         </p>
       </div>
 
+      {isAdmin && (
+        <Alert className="border-amber-300 bg-amber-50 dark:bg-amber-950/20">
+          <AlertTriangle className="h-4 w-4 text-amber-600" />
+          <AlertDescription className="text-amber-800 dark:text-amber-200 text-sm">
+            SMS notifications are not configured. Connect Twilio to enable SMS alerts to complainants on resolution.
+          </AlertDescription>
+        </Alert>
+      )}
+
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {statCards.map((stat) => (
           <Card key={stat.label}>
