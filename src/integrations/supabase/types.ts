@@ -35,6 +35,8 @@ export type Database = {
           resolution_notes: string | null
           resolved_at: string | null
           section: string | null
+          sms_sent: boolean | null
+          sms_sent_at: string | null
           status: string
           title: string
           updated_at: string
@@ -59,6 +61,8 @@ export type Database = {
           resolution_notes?: string | null
           resolved_at?: string | null
           section?: string | null
+          sms_sent?: boolean | null
+          sms_sent_at?: string | null
           status?: string
           title: string
           updated_at?: string
@@ -83,6 +87,8 @@ export type Database = {
           resolution_notes?: string | null
           resolved_at?: string | null
           section?: string | null
+          sms_sent?: boolean | null
+          sms_sent_at?: string | null
           status?: string
           title?: string
           updated_at?: string
@@ -123,6 +129,47 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "feedback_complaint_id_fkey"
+            columns: ["complaint_id"]
+            isOneToOne: false
+            referencedRelation: "complaints"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          body: string
+          complaint_id: string | null
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          title: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          body: string
+          complaint_id?: string | null
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          title: string
+          type: string
+          user_id: string
+        }
+        Update: {
+          body?: string
+          complaint_id?: string | null
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          title?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_complaint_id_fkey"
             columns: ["complaint_id"]
             isOneToOne: false
             referencedRelation: "complaints"
