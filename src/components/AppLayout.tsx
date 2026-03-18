@@ -15,8 +15,10 @@ const navItems = [
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const { user, signOut } = useAuth();
+  const { isTechnician, isAdmin } = useUserRole();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const showBell = isTechnician && !isAdmin;
 
   return (
     <div className="min-h-screen flex bg-background">
