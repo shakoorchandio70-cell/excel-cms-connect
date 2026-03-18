@@ -8,6 +8,8 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import AppLayout from "@/components/AppLayout";
 import DashboardPage from "@/pages/DashboardPage";
 import ComplaintsPage from "@/pages/ComplaintsPage";
+import InventoryPage from "@/pages/InventoryPage";
+import ProfilePage from "@/pages/ProfilePage";
 import AuthPage from "@/pages/AuthPage";
 import NotFound from "@/pages/NotFound";
 
@@ -38,6 +40,26 @@ const App = () => (
                 <ProtectedRoute>
                   <AppLayout>
                     <ComplaintsPage />
+                  </AppLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/inventory"
+              element={
+                <ProtectedRoute>
+                  <AppLayout>
+                    <InventoryPage />
+                  </AppLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <AppLayout>
+                    <ProfilePage />
                   </AppLayout>
                 </ProtectedRoute>
               }

@@ -2,16 +2,11 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useUserRole } from "@/hooks/useUserRole";
 import { Button } from "@/components/ui/button";
 import { 
-  LayoutDashboard, FileText, LogOut, ShieldCheck, Menu, X 
+  LayoutDashboard, FileText, LogOut, ShieldCheck, Menu, X, Package, User 
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import NotificationBell from "@/components/NotificationBell";
-
-const navItems = [
-  { label: "Dashboard", icon: LayoutDashboard, href: "/" },
-  { label: "Complaints", icon: FileText, href: "/complaints" },
-];
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const { user, signOut } = useAuth();
@@ -19,6 +14,13 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const showBell = isTechnician && !isAdmin;
+
+  const navItems = [
+    { label: "Dashboard", icon: LayoutDashboard, href: "/" },
+    { label: "Complaints", icon: FileText, href: "/complaints" },
+    ...(isAdmin ? [{ label: "Inventory", icon: Package, href: "/inventory" }] : []),
+    { label: "Profile", icon: User, href: "/profile" },
+  ];
 
   return (
     <div className="min-h-screen flex bg-background">

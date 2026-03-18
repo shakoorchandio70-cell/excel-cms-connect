@@ -136,6 +136,45 @@ export type Database = {
           },
         ]
       }
+      inventory: {
+        Row: {
+          category: string
+          created_at: string
+          current_stock: number
+          id: string
+          item_name: string
+          min_level: number
+          total_consumed: number
+          total_inward: number
+          unit: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          current_stock?: number
+          id?: string
+          item_name: string
+          min_level?: number
+          total_consumed?: number
+          total_inward?: number
+          unit?: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          current_stock?: number
+          id?: string
+          item_name?: string
+          min_level?: number
+          total_consumed?: number
+          total_inward?: number
+          unit?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       notifications: {
         Row: {
           body: string
@@ -181,12 +220,15 @@ export type Database = {
         Row: {
           avatar_url: string | null
           created_at: string
+          daily_alert_time: string | null
           email: string | null
           full_name: string | null
           id: string
           is_assignable: boolean | null
           is_excluded: boolean | null
           location: string | null
+          mobile_number: string | null
+          mobile_updated_at: string | null
           trade: string | null
           updated_at: string
           user_id: string
@@ -194,12 +236,15 @@ export type Database = {
         Insert: {
           avatar_url?: string | null
           created_at?: string
+          daily_alert_time?: string | null
           email?: string | null
           full_name?: string | null
           id?: string
           is_assignable?: boolean | null
           is_excluded?: boolean | null
           location?: string | null
+          mobile_number?: string | null
+          mobile_updated_at?: string | null
           trade?: string | null
           updated_at?: string
           user_id: string
@@ -207,17 +252,115 @@ export type Database = {
         Update: {
           avatar_url?: string | null
           created_at?: string
+          daily_alert_time?: string | null
           email?: string | null
           full_name?: string | null
           id?: string
           is_assignable?: boolean | null
           is_excluded?: boolean | null
           location?: string | null
+          mobile_number?: string | null
+          mobile_updated_at?: string | null
           trade?: string | null
           updated_at?: string
           user_id?: string
         }
         Relationships: []
+      }
+      stock_alerts: {
+        Row: {
+          alert_type: string
+          created_at: string
+          id: string
+          item_id: string | null
+          min_level: number | null
+          sent_at: string | null
+          sms_sent: boolean | null
+          stock_at_alert: number | null
+        }
+        Insert: {
+          alert_type: string
+          created_at?: string
+          id?: string
+          item_id?: string | null
+          min_level?: number | null
+          sent_at?: string | null
+          sms_sent?: boolean | null
+          stock_at_alert?: number | null
+        }
+        Update: {
+          alert_type?: string
+          created_at?: string
+          id?: string
+          item_id?: string | null
+          min_level?: number | null
+          sent_at?: string | null
+          sms_sent?: boolean | null
+          stock_at_alert?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stock_alerts_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "inventory"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stock_log: {
+        Row: {
+          complaint_id: string | null
+          date_received: string | null
+          direction: string
+          id: string
+          item_id: string
+          logged_at: string
+          qty: number
+          remarks: string | null
+          supplier: string | null
+          used_by: string | null
+        }
+        Insert: {
+          complaint_id?: string | null
+          date_received?: string | null
+          direction: string
+          id?: string
+          item_id: string
+          logged_at?: string
+          qty: number
+          remarks?: string | null
+          supplier?: string | null
+          used_by?: string | null
+        }
+        Update: {
+          complaint_id?: string | null
+          date_received?: string | null
+          direction?: string
+          id?: string
+          item_id?: string
+          logged_at?: string
+          qty?: number
+          remarks?: string | null
+          supplier?: string | null
+          used_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stock_log_complaint_id_fkey"
+            columns: ["complaint_id"]
+            isOneToOne: false
+            referencedRelation: "complaints"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stock_log_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "inventory"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {

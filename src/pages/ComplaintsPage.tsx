@@ -152,7 +152,7 @@ const ComplaintsPage = () => {
     toast.success("Complaint updated");
   };
 
-  const handleUpdateStatusSave = async (data: { status: string; resolution_notes?: string }) => {
+  const handleUpdateStatusSave = async (data: { status: string; resolution_notes?: string; items_used?: { item_id: string; qty: number }[] }) => {
     const updates: any = {
       status: data.status,
       last_updated_by: user!.id,
@@ -162,6 +162,42 @@ const ComplaintsPage = () => {
     if (data.status === "Resolved") updates.resolved_at = new Date().toISOString();
     const { error } = await supabase.from("complaints").update(updates).eq("id", updateStatusComplaint.id);
     if (error) throw error;
+
+    // Deduct inventory items if any
+    if (data.items_used && data.items_used.length > 0) {
+      for (const item of data.items_used) {
+        // Get current stock
+        const { data: invItem } = await supabase.from("inventory").select("*").eq("id", item.item_id).single();
+        if (invItem) {
+          const newStock = Number(invItem.current_stock) - item.qty;
+          const newConsumed = Number(invItem.total_consumed) + item.qty;
+          await supabase.from("inventory").update({
+            current_stock: newStock,
+            total_consumed: newConsumed,
+          } as any).eq("id", item.item_id);
+
+          // Log outward
+          await supabase.from("stock_log").insert({
+            item_id: item.item_id,
+            qty: item.qty,
+            direction: "Outward",
+            complaint_id: updateStatusComplaint.id,
+            used_by: user!.id,
+          } as any);
+
+          // Check low stock alert
+          if (newStock <= Number(invItem.min_level)) {
+            try {
+              await supabase.functions.invoke("check-low-stock", {
+                body: { item_id: item.item_id },
+              });
+            } catch (e) {
+              console.error("Low stock check failed (non-blocking):", e);
+            }
+          }
+        }
+      }
+    }
 
     // Trigger SMS on resolve
     if (data.status === "Resolved") {
