@@ -101,9 +101,10 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           >
             {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
-          <h1 className="text-lg font-semibold text-card-foreground">
+          <h1 className="text-lg font-semibold text-card-foreground flex-1">
             {navItems.find((i) => i.href === location.pathname)?.label ?? "CMS Portal"}
           </h1>
+          {showBell && <NotificationBell />}
         </header>
         <main className="flex-1 p-4 lg:p-6 overflow-auto">{children}</main>
       </div>
