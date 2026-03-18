@@ -1,10 +1,12 @@
 import { useAuth } from "@/contexts/AuthContext";
+import { useUserRole } from "@/hooks/useUserRole";
 import { Button } from "@/components/ui/button";
 import { 
   LayoutDashboard, FileText, LogOut, ShieldCheck, Menu, X 
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import NotificationBell from "@/components/NotificationBell";
 
 const navItems = [
   { label: "Dashboard", icon: LayoutDashboard, href: "/" },
