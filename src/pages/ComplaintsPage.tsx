@@ -126,6 +126,17 @@ const ComplaintsPage = () => {
     if (data.priority) updates.priority = data.priority;
     const { error } = await supabase.from("complaints").update(updates).eq("id", assignComplaint.id);
     if (error) throw error;
+
+    // Insert notification for the assigned technician
+    const techProfile = profileMap[data.assigned_to];
+    await supabase.from("notifications").insert({
+      user_id: data.assigned_to,
+      title: "New complaint assigned to you",
+      body: `Complaint ${assignComplaint.complaint_number} — ${assignComplaint.title} assigned to you. Location: ${assignComplaint.section || "N/A"} | Priority: ${data.priority || assignComplaint.priority}. Please log in to view and update the status.`,
+      type: "assignment",
+      complaint_id: assignComplaint.id,
+    });
+
     queryClient.invalidateQueries({ queryKey: ["complaints"] });
     toast.success("Technician assigned successfully");
   };
@@ -151,6 +162,18 @@ const ComplaintsPage = () => {
     if (data.status === "Resolved") updates.resolved_at = new Date().toISOString();
     const { error } = await supabase.from("complaints").update(updates).eq("id", updateStatusComplaint.id);
     if (error) throw error;
+
+    // Trigger SMS on resolve
+    if (data.status === "Resolved") {
+      try {
+        await supabase.functions.invoke("send-sms-on-resolve", {
+          body: { complaint_id: updateStatusComplaint.id },
+        });
+      } catch (smsErr) {
+        console.error("SMS trigger failed (non-blocking):", smsErr);
+      }
+    }
+
     queryClient.invalidateQueries({ queryKey: ["complaints"] });
     toast.success("Status updated");
   };

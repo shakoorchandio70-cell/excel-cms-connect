@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { AlertCircle, Clock, CheckCircle2, XCircle, TrendingUp, FileText, Star, RotateCcw, Percent } from "lucide-react";
+import { AlertCircle, Clock, CheckCircle2, XCircle, TrendingUp, FileText, Star, RotateCcw, Percent, AlertTriangle } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import StarRating from "@/components/StarRating";
 import { useUserRole } from "@/hooks/useUserRole";
 import { useAuth } from "@/contexts/AuthContext";
@@ -90,6 +91,15 @@ const DashboardPage = () => {
           {isTechnician && !isAdmin ? "Your assigned tasks overview" : "Overview of your complaint management system"}
         </p>
       </div>
+
+      {isAdmin && (
+        <Alert className="border-amber-300 bg-amber-50 dark:bg-amber-950/20">
+          <AlertTriangle className="h-4 w-4 text-amber-600" />
+          <AlertDescription className="text-amber-800 dark:text-amber-200 text-sm">
+            SMS notifications are not configured. Connect Twilio to enable SMS alerts to complainants on resolution.
+          </AlertDescription>
+        </Alert>
+      )}
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {statCards.map((stat) => (

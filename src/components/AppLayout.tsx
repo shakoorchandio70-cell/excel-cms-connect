@@ -1,10 +1,12 @@
 import { useAuth } from "@/contexts/AuthContext";
+import { useUserRole } from "@/hooks/useUserRole";
 import { Button } from "@/components/ui/button";
 import { 
   LayoutDashboard, FileText, LogOut, ShieldCheck, Menu, X 
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import NotificationBell from "@/components/NotificationBell";
 
 const navItems = [
   { label: "Dashboard", icon: LayoutDashboard, href: "/" },
@@ -13,8 +15,10 @@ const navItems = [
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const { user, signOut } = useAuth();
+  const { isTechnician, isAdmin } = useUserRole();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const showBell = isTechnician && !isAdmin;
 
   return (
     <div className="min-h-screen flex bg-background">
@@ -97,9 +101,10 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           >
             {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
-          <h1 className="text-lg font-semibold text-card-foreground">
+          <h1 className="text-lg font-semibold text-card-foreground flex-1">
             {navItems.find((i) => i.href === location.pathname)?.label ?? "CMS Portal"}
           </h1>
+          {showBell && <NotificationBell />}
         </header>
         <main className="flex-1 p-4 lg:p-6 overflow-auto">{children}</main>
       </div>
