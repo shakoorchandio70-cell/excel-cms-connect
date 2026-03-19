@@ -47,7 +47,7 @@ const ProfilePage = () => {
     }
   };
 
-  // Only super admin gets profile settings with mobile/alert time
+  // Only super admin gets daily alert time setting
   const isSuperAdmin = user?.email === "superadmin@cati.local";
 
   return (
