@@ -303,7 +303,7 @@ function AddItemModal({ open, onClose, categories, onSaved }: { open: boolean; o
               <Select value={form.category} onValueChange={(v) => setForm({ ...form, category: v })}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
-                  {[...new Set([...categories, "Electrical", "Lighting", "Wiring", "HVAC", "Accessories", "Tools"])].sort().map((c) => (
+                  {[...new Set([...categories, "Switches & Sockets", "Circuit Protection", "Fans", "AC & Cooling", "Conduit & Ducting", "Wiring & Cabling", "Fixings & Hardware", "Miscellaneous", "Meters & Instruments", "Extension & Multi-socket", "Lighting"])].sort().map((c) => (
                     <SelectItem key={c} value={c}>{c}</SelectItem>
                   ))}
                 </SelectContent>
