@@ -6,6 +6,8 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const GATEWAY_URL = "https://connector-gateway.lovable.dev/twilio";
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -18,7 +20,6 @@ serve(async (req) => {
 
     const { item_id } = await req.json();
 
-    // Get the item
     const { data: item, error: itemErr } = await supabase
       .from("inventory")
       .select("*")
@@ -32,7 +33,6 @@ serve(async (req) => {
       });
     }
 
-    // Check if below min level
     if (Number(item.current_stock) > Number(item.min_level)) {
       return new Response(JSON.stringify({ alert: false }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -54,7 +54,7 @@ serve(async (req) => {
       });
     }
 
-    // Get super admin mobile
+    // Get admin mobile
     const { data: superAdminRoles } = await supabase
       .from("user_roles")
       .select("user_id")
@@ -72,36 +72,35 @@ serve(async (req) => {
         if (profile?.mobile_number) {
           const smsBody = `CATI E&M Stock Alert:\n"${item.item_name}" has dropped below minimum level.\nCurrent stock: ${item.current_stock} ${item.unit} | Minimum: ${item.min_level} ${item.unit}\nPlease initiate procurement.\n— CATI E&M CMS`;
 
-          // Try sending SMS via Twilio
-          const twilioSid = Deno.env.get("TWILIO_ACCOUNT_SID");
-          const twilioToken = Deno.env.get("TWILIO_AUTH_TOKEN");
-          const twilioPhone = Deno.env.get("TWILIO_PHONE_NUMBER");
+          const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+          const TWILIO_API_KEY = Deno.env.get("TWILIO_API_KEY");
+          const TWILIO_PHONE_NUMBER = Deno.env.get("TWILIO_PHONE_NUMBER");
 
-          if (twilioSid && twilioToken && twilioPhone) {
+          if (LOVABLE_API_KEY && TWILIO_API_KEY && TWILIO_PHONE_NUMBER) {
             try {
-              const twilioUrl = `https://api.twilio.com/2010-04-01/Accounts/${twilioSid}/Messages.json`;
-              const resp = await fetch(twilioUrl, {
+              const resp = await fetch(`${GATEWAY_URL}/Messages.json`, {
                 method: "POST",
                 headers: {
-                  "Authorization": "Basic " + btoa(`${twilioSid}:${twilioToken}`),
+                  "Authorization": `Bearer ${LOVABLE_API_KEY}`,
+                  "X-Connection-Api-Key": TWILIO_API_KEY,
                   "Content-Type": "application/x-www-form-urlencoded",
                 },
                 body: new URLSearchParams({
                   To: profile.mobile_number,
-                  From: twilioPhone,
+                  From: TWILIO_PHONE_NUMBER,
                   Body: smsBody,
                 }),
               });
-              const respText = await resp.text();
+              const respData = await resp.json();
               smsSent = resp.ok;
-              if (!resp.ok) console.error("Twilio error:", respText);
+              if (!resp.ok) console.error("Twilio gateway error:", respData);
             } catch (e) {
               console.error("Twilio SMS failed:", e);
             }
           } else {
             console.log("Twilio not configured. SMS content:", smsBody);
           }
-          break; // Send to first admin with mobile
+          break;
         }
       }
     }
