@@ -6,6 +6,8 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const GATEWAY_URL = "https://connector-gateway.lovable.dev/twilio";
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -16,7 +18,6 @@ serve(async (req) => {
     const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, serviceKey);
 
-    // Get all low stock items
     const { data: allItems } = await supabase.from("inventory").select("*");
     const lowStockItems = (allItems || []).filter(
       (i: any) => Number(i.current_stock) <= Number(i.min_level)
@@ -34,7 +35,6 @@ serve(async (req) => {
       smsBody = `CATI E&M Daily Stock Report — ${today}\n\nLow stock items requiring procurement:\n${itemList}\n\nTotal items below minimum: ${lowStockItems.length}\n— CATI E&M CMS`;
     }
 
-    // Get super admin mobile
     const { data: adminRoles } = await supabase
       .from("user_roles")
       .select("user_id")
@@ -50,22 +50,22 @@ serve(async (req) => {
           .single();
 
         if (profile?.mobile_number) {
-          const twilioSid = Deno.env.get("TWILIO_ACCOUNT_SID");
-          const twilioToken = Deno.env.get("TWILIO_AUTH_TOKEN");
-          const twilioPhone = Deno.env.get("TWILIO_PHONE_NUMBER");
+          const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+          const TWILIO_API_KEY = Deno.env.get("TWILIO_API_KEY");
+          const TWILIO_PHONE_NUMBER = Deno.env.get("TWILIO_PHONE_NUMBER");
 
-          if (twilioSid && twilioToken && twilioPhone) {
+          if (LOVABLE_API_KEY && TWILIO_API_KEY && TWILIO_PHONE_NUMBER) {
             try {
-              const twilioUrl = `https://api.twilio.com/2010-04-01/Accounts/${twilioSid}/Messages.json`;
-              const resp = await fetch(twilioUrl, {
+              const resp = await fetch(`${GATEWAY_URL}/Messages.json`, {
                 method: "POST",
                 headers: {
-                  "Authorization": "Basic " + btoa(`${twilioSid}:${twilioToken}`),
+                  "Authorization": `Bearer ${LOVABLE_API_KEY}`,
+                  "X-Connection-Api-Key": TWILIO_API_KEY,
                   "Content-Type": "application/x-www-form-urlencoded",
                 },
                 body: new URLSearchParams({
                   To: profile.mobile_number,
-                  From: twilioPhone,
+                  From: TWILIO_PHONE_NUMBER,
                   Body: smsBody,
                 }),
               });
@@ -82,7 +82,6 @@ serve(async (req) => {
       }
     }
 
-    // Log alert
     await supabase.from("stock_alerts").insert({
       alert_type: "daily",
       stock_at_alert: lowStockItems.length,

@@ -47,7 +47,7 @@ const ProfilePage = () => {
     }
   };
 
-  // Only super admin gets profile settings with mobile/alert time
+  // Only super admin gets daily alert time setting
   const isSuperAdmin = user?.email === "superadmin@cati.local";
 
   return (
@@ -75,27 +75,26 @@ const ProfilePage = () => {
             <Input value={user?.email || ""} disabled className="bg-muted" />
           </div>
 
+          <div className="space-y-2">
+            <Label>Mobile Number</Label>
+            <Input
+              value={form.mobile_number}
+              onChange={(e) => setForm({ ...form, mobile_number: e.target.value })}
+              placeholder="+92 3XX XXXXXXX (include country code)"
+            />
+            <p className="text-xs text-muted-foreground">Required to receive SMS notifications</p>
+          </div>
+
           {isSuperAdmin && (
-            <>
-              <div className="space-y-2">
-                <Label>Mobile Number</Label>
-                <Input
-                  value={form.mobile_number}
-                  onChange={(e) => setForm({ ...form, mobile_number: e.target.value })}
-                  placeholder="+92 3XX XXXXXXX (include country code)"
-                />
-                <p className="text-xs text-muted-foreground">Used for receiving low stock SMS alerts</p>
-              </div>
-              <div className="space-y-2">
-                <Label>Daily Alert Time</Label>
-                <Input
-                  type="time"
-                  value={form.daily_alert_time}
-                  onChange={(e) => setForm({ ...form, daily_alert_time: e.target.value })}
-                />
-                <p className="text-xs text-muted-foreground">Daily low stock summary will be sent at this time</p>
-              </div>
-            </>
+            <div className="space-y-2">
+              <Label>Daily Alert Time</Label>
+              <Input
+                type="time"
+                value={form.daily_alert_time}
+                onChange={(e) => setForm({ ...form, daily_alert_time: e.target.value })}
+              />
+              <p className="text-xs text-muted-foreground">Daily low stock summary will be sent at this time</p>
+            </div>
           )}
 
           <Button onClick={handleSave} disabled={saving} className="w-full bg-[hsl(var(--status-resolved))] hover:bg-[hsl(145,63%,35%)] text-white">
