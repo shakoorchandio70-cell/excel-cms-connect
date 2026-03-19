@@ -148,20 +148,27 @@ const InventoryPage = () => {
                     </TableHeader>
                     <TableBody>
                       {filtered.map((item: any) => {
-                        const low = item.current_stock <= item.min_level;
+                        const stock = Number(item.current_stock);
+                        const min = Number(item.min_level);
+                        const isNegative = stock < 0;
+                        const isDepleted = stock === 0;
+                        const isLow = stock > 0 && stock <= min;
+                        const isOk = stock > min;
+                        const rowHighlight = isNegative || isDepleted || isLow;
                         return (
-                          <TableRow key={item.id} className={low ? "bg-destructive/5" : ""}>
+                          <TableRow key={item.id} className={rowHighlight ? "bg-destructive/5" : ""}>
                             <TableCell className="font-medium">{item.item_name}</TableCell>
                             <TableCell className="text-sm text-muted-foreground">{item.category}</TableCell>
                             <TableCell className="text-sm">{item.unit}</TableCell>
-                            <TableCell className={`text-right font-semibold ${low ? "text-destructive" : ""}`}>{Number(item.current_stock)}</TableCell>
-                            <TableCell className="text-right text-muted-foreground">{Number(item.min_level)}</TableCell>
+                            <TableCell className={`text-right font-semibold ${rowHighlight ? "text-destructive" : ""}`}>{stock}</TableCell>
+                            <TableCell className="text-right text-muted-foreground">{min}</TableCell>
                             <TableCell className="text-right text-muted-foreground">{Number(item.total_inward)}</TableCell>
                             <TableCell className="text-right text-muted-foreground">{Number(item.total_consumed)}</TableCell>
                             <TableCell>
-                              <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${low ? "status-critical" : "status-resolved"}`}>
-                                {low ? "Low Stock" : "OK"}
-                              </span>
+                              {isNegative && <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-pink-800 text-white">Negative</span>}
+                              {isDepleted && <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-red-600 text-white">Depleted</span>}
+                              {isLow && <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-amber-500 text-white">Low Stock</span>}
+                              {isOk && <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-green-600 text-white">OK</span>}
                             </TableCell>
                             {isAdmin && (
                               <TableCell>
