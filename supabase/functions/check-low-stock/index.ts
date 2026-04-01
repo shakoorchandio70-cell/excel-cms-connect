@@ -7,6 +7,7 @@ const corsHeaders = {
 };
 
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/twilio";
+const RESEND_API_URL = "https://api.resend.com/emails";
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -54,21 +55,70 @@ serve(async (req) => {
       });
     }
 
-    // Get admin mobile
-    const { data: superAdminRoles } = await supabase
+    // Get admin profiles for notification
+    const { data: adminRoles } = await supabase
       .from("user_roles")
       .select("user_id")
       .eq("role", "admin");
 
     let smsSent = false;
-    if (superAdminRoles) {
-      for (const role of superAdminRoles) {
+    let emailSent = false;
+    const deficit = Number(item.min_level) - Number(item.current_stock);
+
+    if (adminRoles) {
+      for (const role of adminRoles) {
         const { data: profile } = await supabase
           .from("profiles")
-          .select("mobile_number, full_name")
+          .select("mobile_number, full_name, email, email_notifications")
           .eq("user_id", role.user_id)
           .single();
 
+        // Send email notification
+        const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+        if (RESEND_API_KEY && profile?.email && (profile as any).email_notifications !== false) {
+          try {
+            const html = `
+              <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                <div style="background: #dc2626; padding: 20px; border-radius: 8px 8px 0 0;">
+                  <h2 style="color: #ffffff; margin: 0;">⚠️ Low Stock Alert</h2>
+                </div>
+                <div style="border: 1px solid #e5e7eb; border-top: none; padding: 24px; border-radius: 0 0 8px 8px;">
+                  <p style="color: #333;">Stock Alert — CATI E&M Inventory</p>
+                  <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+                    <tr><td style="padding: 8px 0; color: #666; width: 140px;">Item:</td><td style="padding: 8px 0; font-weight: bold;">${item.item_name}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #666;">Category:</td><td style="padding: 8px 0;">${item.category}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #666;">Current Stock:</td><td style="padding: 8px 0; color: #dc2626; font-weight: bold;">${item.current_stock} ${item.unit}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #666;">Minimum Level:</td><td style="padding: 8px 0;">${item.min_level} ${item.unit}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #666;">Deficit:</td><td style="padding: 8px 0; color: #dc2626;">${deficit} ${item.unit}</td></tr>
+                  </table>
+                  <p style="color: #333; font-weight: bold;">Please initiate procurement immediately.</p>
+                  <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
+                  <p style="color: #999; font-size: 12px;">— CATI E&M CMS</p>
+                </div>
+              </div>
+            `;
+
+            const resp = await fetch(RESEND_API_URL, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${RESEND_API_KEY}`,
+              },
+              body: JSON.stringify({
+                from: "CATI E&M CMS <onboarding@resend.dev>",
+                to: [profile.email],
+                subject: `Low Stock Alert — ${item.item_name}`,
+                html,
+              }),
+            });
+            emailSent = resp.ok;
+            if (!resp.ok) console.error("Resend error:", await resp.text());
+          } catch (e) {
+            console.error("Email send failed:", e);
+          }
+        }
+
+        // Send SMS notification (if Twilio configured)
         if (profile?.mobile_number) {
           const smsBody = `CATI E&M Stock Alert:\n"${item.item_name}" has dropped below minimum level.\nCurrent stock: ${item.current_stock} ${item.unit} | Minimum: ${item.min_level} ${item.unit}\nPlease initiate procurement.\n— CATI E&M CMS`;
 
@@ -91,14 +141,10 @@ serve(async (req) => {
                   Body: smsBody,
                 }),
               });
-              const respData = await resp.json();
               smsSent = resp.ok;
-              if (!resp.ok) console.error("Twilio gateway error:", respData);
             } catch (e) {
               console.error("Twilio SMS failed:", e);
             }
-          } else {
-            console.log("Twilio not configured. SMS content:", smsBody);
           }
           break;
         }
@@ -111,11 +157,11 @@ serve(async (req) => {
       alert_type: "instant",
       stock_at_alert: item.current_stock,
       min_level: item.min_level,
-      sms_sent: smsSent,
-      sent_at: smsSent ? new Date().toISOString() : null,
+      sms_sent: smsSent || emailSent,
+      sent_at: (smsSent || emailSent) ? new Date().toISOString() : null,
     });
 
-    return new Response(JSON.stringify({ alert: true, sms_sent: smsSent }), {
+    return new Response(JSON.stringify({ alert: true, sms_sent: smsSent, email_sent: emailSent }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (e) {
