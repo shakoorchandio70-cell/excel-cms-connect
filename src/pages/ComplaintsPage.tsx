@@ -213,8 +213,15 @@ const ComplaintsPage = () => {
       }
     }
 
-    // Trigger SMS on resolve
+    // Trigger notifications on resolve (email + SMS)
     if (data.status === "Resolved") {
+      try {
+        await supabase.functions.invoke("send-email-on-resolve", {
+          body: { complaint_id: updateStatusComplaint.id },
+        });
+      } catch (emailErr) {
+        console.error("Email trigger failed (non-blocking):", emailErr);
+      }
       try {
         await supabase.functions.invoke("send-sms-on-resolve", {
           body: { complaint_id: updateStatusComplaint.id },

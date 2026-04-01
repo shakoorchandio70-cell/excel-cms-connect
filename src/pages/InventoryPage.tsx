@@ -95,10 +95,10 @@ const InventoryPage = () => {
       </div>
 
       {isAdmin && (
-        <Alert className="border-amber-300 bg-amber-50 dark:bg-amber-950/20">
-          <AlertTriangle className="h-4 w-4 text-amber-600" />
-          <AlertDescription className="text-amber-800 dark:text-amber-200 text-sm">
-            SMS stock alerts not configured. Connect Twilio and set super admin mobile number to enable low stock alerts.
+        <Alert className="border-blue-300 bg-blue-50 dark:bg-blue-950/20">
+          <AlertTriangle className="h-4 w-4 text-blue-600" />
+          <AlertDescription className="text-blue-800 dark:text-blue-200 text-sm">
+            Email notifications active. WhatsApp notifications coming soon. Update your email in your Profile to ensure you receive alerts.
           </AlertDescription>
         </Alert>
       )}
