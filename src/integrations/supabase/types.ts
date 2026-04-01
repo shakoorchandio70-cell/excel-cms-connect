@@ -222,6 +222,7 @@ export type Database = {
           created_at: string
           daily_alert_time: string | null
           email: string | null
+          email_notifications: boolean | null
           full_name: string | null
           id: string
           is_assignable: boolean | null
@@ -238,6 +239,7 @@ export type Database = {
           created_at?: string
           daily_alert_time?: string | null
           email?: string | null
+          email_notifications?: boolean | null
           full_name?: string | null
           id?: string
           is_assignable?: boolean | null
@@ -254,6 +256,7 @@ export type Database = {
           created_at?: string
           daily_alert_time?: string | null
           email?: string | null
+          email_notifications?: boolean | null
           full_name?: string | null
           id?: string
           is_assignable?: boolean | null
