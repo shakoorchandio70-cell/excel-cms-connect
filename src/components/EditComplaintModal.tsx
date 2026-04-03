@@ -39,9 +39,9 @@ const EditComplaintModal = ({ complaint, open, onClose, onSave }: EditComplaintM
   const { data: technicians = [] } = useQuery({
     queryKey: ["assignable-technicians"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("profiles").select("*").eq("is_assignable", true).eq("is_excluded", false);
+      const { data, error } = await supabase.rpc("get_public_profiles");
       if (error) throw error;
-      return data;
+      return (data || []).filter((p: any) => p.is_assignable && !p.is_excluded);
     },
   });
 

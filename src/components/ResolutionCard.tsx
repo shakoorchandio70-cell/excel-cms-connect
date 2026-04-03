@@ -42,13 +42,10 @@ const ResolutionCard = ({ complaint, onStatusChange }: ResolutionCardProps) => {
     queryKey: ["tech-profile", complaint.assigned_to],
     enabled: !!complaint.assigned_to,
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("full_name")
-        .eq("user_id", complaint.assigned_to)
-        .single();
+      const { data, error } = await supabase.rpc("get_public_profiles");
       if (error) throw error;
-      return data;
+      const match = (data || []).find((p: any) => p.user_id === complaint.assigned_to);
+      return match || { full_name: "Unknown" };
     },
   });
 
