@@ -33,9 +33,14 @@ const DashboardPage = () => {
   const { data: profiles = [] } = useQuery({
     queryKey: ["all-profiles"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("profiles").select("*");
+      if (isAdmin) {
+        const { data, error } = await supabase.from("profiles").select("*");
+        if (error) throw error;
+        return data;
+      }
+      const { data, error } = await supabase.rpc("get_public_profiles");
       if (error) throw error;
-      return data;
+      return data || [];
     },
   });
 

@@ -24,13 +24,9 @@ const AssignModal = ({ complaint, open, onClose, onSave }: AssignModalProps) => 
   const { data: technicians = [] } = useQuery({
     queryKey: ["assignable-technicians"],
     queryFn: async () => {
-      const { data: profiles, error } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("is_assignable", true)
-        .eq("is_excluded", false);
+      const { data, error } = await supabase.rpc("get_public_profiles");
       if (error) throw error;
-      return profiles;
+      return (data || []).filter((p: any) => p.is_assignable && !p.is_excluded);
     },
   });
 

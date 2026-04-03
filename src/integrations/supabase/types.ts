@@ -398,6 +398,18 @@ export type Database = {
         }
         Returns: string
       }
+      get_public_profiles: {
+        Args: never
+        Returns: {
+          avatar_url: string
+          full_name: string
+          is_assignable: boolean
+          is_excluded: boolean
+          location: string
+          trade: string
+          user_id: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

@@ -53,9 +53,9 @@ const InventoryPage = () => {
   const { data: profiles = [] } = useQuery({
     queryKey: ["all-profiles"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("profiles").select("*");
+      const { data, error } = await supabase.rpc("get_public_profiles");
       if (error) throw error;
-      return data;
+      return data || [];
     },
   });
 
