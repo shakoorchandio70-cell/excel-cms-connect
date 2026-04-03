@@ -127,14 +127,14 @@ const ComplaintsPage = () => {
     const { error } = await supabase.from("complaints").update(updates).eq("id", assignComplaint.id);
     if (error) throw error;
 
-    // Insert notification for the assigned technician
+    // Insert notification for the assigned technician via secure RPC
     const techProfile = profileMap[data.assigned_to];
-    await supabase.from("notifications").insert({
-      user_id: data.assigned_to,
-      title: "New complaint assigned to you",
-      body: `Complaint ${assignComplaint.complaint_number} — ${assignComplaint.title} assigned to you. Location: ${assignComplaint.section || "N/A"} | Priority: ${data.priority || assignComplaint.priority}. Please log in to view and update the status.`,
-      type: "assignment",
-      complaint_id: assignComplaint.id,
+    await supabase.rpc("create_notification", {
+      _user_id: data.assigned_to,
+      _title: "New complaint assigned to you",
+      _body: `Complaint ${assignComplaint.complaint_number} — ${assignComplaint.title} assigned to you. Location: ${assignComplaint.section || "N/A"} | Priority: ${data.priority || assignComplaint.priority}. Please log in to view and update the status.`,
+      _type: "assignment",
+      _complaint_id: assignComplaint.id,
     });
 
     // Send email notification to technician (non-blocking)
