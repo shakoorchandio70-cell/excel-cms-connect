@@ -335,7 +335,7 @@ const ComplaintsPage = () => {
               </DialogTrigger>
               <DialogContent className="max-w-lg max-h-[85vh] overflow-y-auto">
                 <DialogHeader><DialogTitle>Create Complaint</DialogTitle></DialogHeader>
-                <ComplaintForm onSubmit={(data) => createMutation.mutate(data)} loading={createMutation.isPending} />
+                <ComplaintForm onSubmit={(data) => createMutation.mutate(data)} loading={createMutation.isPending} isAdmin={isAdmin} userSection={profile?.location || "ANS - ATS Block"} />
               </DialogContent>
             </Dialog>
           )}
