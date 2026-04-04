@@ -49,7 +49,7 @@ const statusClass = (s: string) => {
 
 const ComplaintsPage = () => {
   const { user } = useAuth();
-  const { isAdmin, isTechnician, isOfficial } = useUserRole();
+  const { isAdmin, isTechnician, isOfficial, profile } = useUserRole();
   const queryClient = useQueryClient();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
