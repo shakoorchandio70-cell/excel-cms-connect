@@ -49,7 +49,7 @@ const statusClass = (s: string) => {
 
 const ComplaintsPage = () => {
   const { user } = useAuth();
-  const { isAdmin, isTechnician, isOfficial } = useUserRole();
+  const { isAdmin, isTechnician, isOfficial, profile } = useUserRole();
   const queryClient = useQueryClient();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
@@ -335,7 +335,7 @@ const ComplaintsPage = () => {
               </DialogTrigger>
               <DialogContent className="max-w-lg max-h-[85vh] overflow-y-auto">
                 <DialogHeader><DialogTitle>Create Complaint</DialogTitle></DialogHeader>
-                <ComplaintForm onSubmit={(data) => createMutation.mutate(data)} loading={createMutation.isPending} />
+                <ComplaintForm onSubmit={(data) => createMutation.mutate(data)} loading={createMutation.isPending} isAdmin={isAdmin} userSection={profile?.location || "ANS - ATS Block"} />
               </DialogContent>
             </Dialog>
           )}
@@ -508,9 +508,9 @@ const ComplaintsPage = () => {
   );
 };
 
-function ComplaintForm({ onSubmit, loading }: { onSubmit: (data: any) => void; loading: boolean }) {
+function ComplaintForm({ onSubmit, loading, isAdmin, userSection }: { onSubmit: (data: any) => void; loading: boolean; isAdmin: boolean; userSection: string }) {
   const [form, setForm] = useState({
-    title: "", description: "", category: "AC not working", section: "ANS - ATS Block",
+    title: "", description: "", category: "AC not working", section: isAdmin ? "ANS - ATS Block" : userSection,
     priority: "Medium", complainant_name: "", complainant_email: "", complainant_phone: "",
   });
 
@@ -534,10 +534,14 @@ function ComplaintForm({ onSubmit, loading }: { onSubmit: (data: any) => void; l
         </div>
         <div className="space-y-2">
           <Label>Location</Label>
-          <Select value={form.section} onValueChange={(v) => setForm({ ...form, section: v })}>
-            <SelectTrigger><SelectValue /></SelectTrigger>
-            <SelectContent>{SECTIONS.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent>
-          </Select>
+          {isAdmin ? (
+            <Select value={form.section} onValueChange={(v) => setForm({ ...form, section: v })}>
+              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectContent>{SECTIONS.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent>
+            </Select>
+          ) : (
+            <Input value={form.section} readOnly className="bg-muted cursor-not-allowed" />
+          )}
         </div>
       </div>
       <div className="space-y-2">
