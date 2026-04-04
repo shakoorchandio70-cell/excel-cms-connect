@@ -1,71 +1,35 @@
 
 
-# Fix Plan — Mobile Number, Inventory Data, Total Used, Twilio SMS
+# Fix: Restrict Complaint Section to User's Own Location
 
-## Overview
+## Problem
+Any non-admin user can pick any section from the dropdown when creating a complaint. Officials should only submit complaints for their own section/location.
 
-Four fixes: (1) show mobile number field for all roles, (2) replace inventory seed data with 46 real items, (3) ensure Total Used column reads `total_consumed`, (4) set up Twilio via connector and update edge functions to use the gateway.
+## Solution
 
----
+### File: `src/pages/ComplaintsPage.tsx`
 
-## Fix 1 — Mobile Number for All Roles
+**1. Pass user context to ComplaintForm**
+- Pass `isAdmin` and the user's `profile.location` (from `useUserRole`) into the `ComplaintForm` component as props.
 
-**File: `src/pages/ProfilePage.tsx`**
+**2. ComplaintForm — conditional section field**
+- If `isAdmin`: show the section dropdown as-is (all SECTIONS).
+- If non-admin: hide the dropdown entirely. Initialize `form.section` to the user's `profile.location`. Display it as a read-only text field so the user can see their section but not change it.
 
-- Remove the `isSuperAdmin` condition (line 51, line 78). Show the mobile number field and daily alert time for ALL users.
-- Keep the daily alert time visible only to admins (since only they receive stock alerts). Mobile number should be unconditional.
+**3. Officials complaint list filtering**
+- Currently, officials see all complaints (RLS returns complaints where `created_by = auth.uid()`). The existing RLS policy already handles this correctly — officials only see their own complaints. No RLS change needed.
+- However, if officials should also see complaints from their same section (submitted by others in their location), that would require an RLS change. Based on the current RLS (`created_by = auth.uid() OR assigned_to = auth.uid() OR admin`), officials only see what they created, which seems correct.
 
-**File: `src/components/AppLayout.tsx`**
+### Technical Details
 
-- Profile link is already in the nav for all roles (line 22) — no change needed.
+- `useUserRole()` already returns `profile` with `location` field — no new queries needed.
+- The `ComplaintForm` component signature changes from `{ onSubmit, loading }` to `{ onSubmit, loading, isAdmin, userSection }`.
+- `userSection` defaults to `"ANS - ATS Block"` if profile location is somehow empty.
+- No database or RLS changes required.
 
-**No DB changes needed** — `profiles` table already has `mobile_number` and `mobile_updated_at` columns.
-
----
-
-## Fix 2 — Replace Inventory Seed Data
-
-**Use the database insert tool** to:
-1. `DELETE FROM inventory;` — clear all existing rows
-2. `INSERT INTO inventory ...` — insert the 46 real items from the spec with correct categories, units, stock levels, and min levels
-
-Categories used: Switches & Sockets, Circuit Protection, Fans, AC & Cooling, Conduit & Ducting, Wiring & Cabling, Fixings & Hardware, Miscellaneous, Meters & Instruments, Extension & Multi-socket, Lighting.
-
-**File: `src/pages/InventoryPage.tsx`**
-
-Update the status badge logic (around line 151-164) to show 4 levels:
-- `current_stock > min_level` → Green "OK"
-- `current_stock > 0 && current_stock <= min_level` → Amber "Low Stock"  
-- `current_stock === 0` → Red "Depleted"
-- `current_stock < 0` → Dark pink "Negative"
-
-Update the Add New Item modal category dropdown (line 299) to use the real categories from the data instead of hardcoded "HVAC", "Accessories", etc.
-
----
-
-## Fix 3 — Total Used Column
-
-The inventory query already uses `select("*")` which includes `total_consumed`, and line 160 already renders `{Number(item.total_consumed)}`. This should work correctly once the seed data is replaced with correct values. Will verify no issues exist.
-
----
-
-## Fix 4 — Twilio SMS via Connector
-
-1. **Connect Twilio** using the `standard_connectors--connect` tool to set up `TWILIO_API_KEY` and `LOVABLE_API_KEY` as secrets.
-2. **Ask user for `TWILIO_PHONE_NUMBER`** via `add_secret` since the connector doesn't provide the From number.
-3. **Update `check-low-stock/index.ts`** — replace direct Twilio API calls (lines 76-103) with the connector gateway pattern (`https://connector-gateway.lovable.dev/twilio/Messages.json` with `LOVABLE_API_KEY` + `TWILIO_API_KEY` headers).
-4. **Update `daily-stock-summary/index.ts`** — same gateway migration.
-5. **`send-sms-on-resolve/index.ts`** already uses the gateway — no changes needed.
-6. **Update `src/pages/InventoryPage.tsx`** — make the SMS banner conditional: check if Twilio is configured (via a quick edge function call or env check) and hide when configured.
-
----
-
-## Build Order
-
-1. Update ProfilePage — remove `isSuperAdmin` guard on mobile field
-2. Replace inventory data via DB tool
-3. Update InventoryPage — 4-tier status badges + fix category list
-4. Connect Twilio connector + request phone number secret
-5. Update `check-low-stock` and `daily-stock-summary` to use gateway
-6. Conditionally hide SMS banner
+### Build Order
+1. Update `ComplaintForm` props to accept `isAdmin` and `userSection`
+2. Conditionally render section dropdown (admin) vs read-only display (non-admin)
+3. Initialize form section from `userSection` for non-admins
+4. Pass props from the parent where `ComplaintForm` is used
 
