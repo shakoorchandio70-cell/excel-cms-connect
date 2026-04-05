@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { ShieldCheck, Mail, Lock, ArrowRight, CheckCircle2, Users, Zap } from "lucide-react";
+import { Mail, Lock, ArrowRight, CheckCircle2, Users, Zap, ShieldCheck } from "lucide-react";
+import BrandLogo from "@/components/BrandLogo";
 
 const AuthPage = () => {
   const navigate = useNavigate();
