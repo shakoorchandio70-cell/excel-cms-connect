@@ -97,6 +97,7 @@ const ComplaintsPage = () => {
         title: data.title,
         description: data.description,
         category: data.category || "AC not working",
+        category_other: data.category === "Other" ? data.category_other : null,
         section: data.section || "ANS - ATS Block",
         priority: data.priority || "Medium",
         complainant_name: data.complainant_name,
