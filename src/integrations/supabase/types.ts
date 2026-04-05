@@ -19,6 +19,7 @@ export type Database = {
           assigned_at: string | null
           assigned_to: string | null
           category: string
+          category_other: string | null
           complainant_email: string | null
           complainant_name: string | null
           complainant_phone: string | null
@@ -45,6 +46,7 @@ export type Database = {
           assigned_at?: string | null
           assigned_to?: string | null
           category?: string
+          category_other?: string | null
           complainant_email?: string | null
           complainant_name?: string | null
           complainant_phone?: string | null
@@ -71,6 +73,7 @@ export type Database = {
           assigned_at?: string | null
           assigned_to?: string | null
           category?: string
+          category_other?: string | null
           complainant_email?: string | null
           complainant_name?: string | null
           complainant_phone?: string | null
