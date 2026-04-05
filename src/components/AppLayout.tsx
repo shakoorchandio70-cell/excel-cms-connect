@@ -32,14 +32,8 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
         }`}
       >
         <div className="flex flex-col h-full">
-          <div className="flex items-center gap-3 p-6 border-b border-sidebar-border">
-            <div className="h-9 w-9 rounded-lg bg-sidebar-primary flex items-center justify-center">
-              <ShieldCheck className="h-5 w-5 text-sidebar-primary-foreground" />
-            </div>
-            <div>
-              <h2 className="font-semibold text-sm text-sidebar-foreground">CATI E&M</h2>
-              <p className="text-xs text-sidebar-foreground/60">Complaint Management</p>
-            </div>
+          <div className="p-6 border-b border-sidebar-border">
+            <BrandLogo size={36} />
           </div>
 
           <nav className="flex-1 p-4 space-y-1">

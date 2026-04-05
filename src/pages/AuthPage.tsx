@@ -105,14 +105,8 @@ const AuthPage = () => {
             }}>
             
             {/* Logo + Brand */}
-            <div className="flex items-center gap-3 mb-8">
-              <div className="h-11 w-11 rounded-xl flex items-center justify-center"
-                style={{ background: "linear-gradient(135deg, #1E3A8A, #3B82F6)" }}>
-                <ShieldCheck className="h-6 w-6 text-white" />
-              </div>
-              <span className="text-lg font-bold tracking-tight" style={{ color: "#1E293B" }}>
-                CATI E&M
-              </span>
+            <div className="mb-8">
+              <BrandLogo size={40} />
             </div>
 
             {/* Titles */}
