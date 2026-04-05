@@ -2,12 +2,12 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useUserRole } from "@/hooks/useUserRole";
 import { Button } from "@/components/ui/button";
 import { 
-  LayoutDashboard, FileText, LogOut, Menu, X, Package, User 
+  LayoutDashboard, FileText, LogOut, Menu, X, Package, User, Settings, Search, Bell
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import NotificationBell from "@/components/NotificationBell";
-import BrandLogo from "@/components/BrandLogo";
+import { CatiLogo } from "@/components/BrandLogo";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const { user, signOut } = useAuth();
@@ -24,85 +24,133 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   ];
 
   return (
-    <div className="min-h-screen flex bg-background">
-      {/* Sidebar */}
+    <div className="min-h-screen flex" style={{ background: '#07090F' }}>
+      {/* Slim Icon Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-sidebar text-sidebar-foreground transform transition-transform duration-200 lg:translate-x-0 lg:static ${
+        className={`fixed inset-y-0 left-0 z-50 w-[52px] flex flex-col items-center py-4 transition-transform duration-200 lg:translate-x-0 lg:static ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
+        style={{ background: '#0C1018', borderRight: '1px solid #1E2535' }}
       >
-        <div className="flex flex-col h-full">
-          <div className="p-6 border-b border-sidebar-border">
-            <BrandLogo size={36} />
-          </div>
+        {/* Logo */}
+        <div className="mb-6">
+          <CatiLogo size={28} />
+        </div>
 
-          <nav className="flex-1 p-4 space-y-1">
-            {navItems.map((item) => {
-              const active = location.pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  onClick={() => setSidebarOpen(false)}
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                    active
-                      ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                      : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
-                  }`}
-                >
-                  <item.icon className="h-4 w-4" />
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+        {/* Nav Icons */}
+        <nav className="flex-1 flex flex-col items-center gap-1">
+          {navItems.map((item) => {
+            const active = location.pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                to={item.href}
+                onClick={() => setSidebarOpen(false)}
+                title={item.label}
+                className="w-9 h-9 flex items-center justify-center rounded-lg transition-colors"
+                style={{
+                  background: active ? 'rgba(0,212,255,0.12)' : 'transparent',
+                  color: active ? '#00D4FF' : '#475569',
+                }}
+              >
+                <item.icon className="h-[18px] w-[18px]" />
+              </Link>
+            );
+          })}
+        </nav>
 
-          <div className="p-4 border-t border-sidebar-border">
-            <div className="flex items-center gap-3 mb-3 px-2">
-              <div className="h-8 w-8 rounded-full bg-sidebar-accent flex items-center justify-center text-xs font-semibold text-sidebar-accent-foreground">
-                {user?.email?.charAt(0).toUpperCase()}
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium text-sidebar-foreground truncate">{user?.email}</p>
-              </div>
-            </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={signOut}
-              className="w-full justify-start gap-2 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50"
-            >
-              <LogOut className="h-4 w-4" />
-              Sign Out
-            </Button>
-          </div>
+        {/* Bottom: Settings + Logout */}
+        <div className="flex flex-col items-center gap-1 mb-2">
+          <button
+            title="Settings"
+            className="w-9 h-9 flex items-center justify-center rounded-lg transition-colors"
+            style={{ color: '#475569' }}
+          >
+            <Settings className="h-[18px] w-[18px]" />
+          </button>
+          <button
+            onClick={signOut}
+            title="Sign Out"
+            className="w-9 h-9 flex items-center justify-center rounded-lg transition-colors"
+            style={{ color: '#475569' }}
+          >
+            <LogOut className="h-[18px] w-[18px]" />
+          </button>
         </div>
       </aside>
 
-      {/* Overlay */}
+      {/* Overlay (mobile) */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 z-40 bg-foreground/20 lg:hidden"
+          className="fixed inset-0 z-40 lg:hidden"
+          style={{ background: 'rgba(0,0,0,0.6)' }}
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-h-screen">
-        <header className="h-14 border-b flex items-center px-4 lg:px-6 bg-card">
+        {/* Navbar */}
+        <header
+          className="flex items-center px-4 lg:px-6"
+          style={{
+            height: '54px',
+            background: '#0C1018',
+            borderBottom: '1px solid #1E2535',
+          }}
+        >
           <Button
             variant="ghost"
             size="icon"
             className="lg:hidden mr-2"
             onClick={() => setSidebarOpen(!sidebarOpen)}
+            style={{ color: '#94A3B8' }}
           >
             {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
-          <h1 className="text-lg font-semibold text-card-foreground flex-1">
-            {navItems.find((i) => i.href === location.pathname)?.label ?? "CMS Portal"}
-          </h1>
-          {showBell && <NotificationBell />}
+
+          {/* Brand text */}
+          <div className="flex items-center gap-2 mr-4">
+            <span className="text-sm font-semibold hidden lg:inline" style={{ color: '#F1F5F9' }}>E&M CMS</span>
+          </div>
+
+          {/* Search bar (center) */}
+          <div className="flex-1 max-w-md mx-auto hidden md:block">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: '#475569' }} />
+              <input
+                type="text"
+                placeholder="Search..."
+                className="w-full h-9 pl-9 pr-4 text-sm rounded-[7px] outline-none transition-all duration-200"
+                style={{
+                  background: '#12161F',
+                  border: '1px solid #1E2535',
+                  color: '#F1F5F9',
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = '#00D4FF';
+                  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0,212,255,0.15)';
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = '#1E2535';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Right: bell + avatar */}
+          <div className="flex items-center gap-3 ml-auto">
+            {showBell && <NotificationBell />}
+            <div
+              className="h-8 w-8 rounded-full flex items-center justify-center text-xs font-semibold"
+              style={{ background: 'rgba(0,212,255,0.15)', color: '#00D4FF' }}
+            >
+              {user?.email?.charAt(0).toUpperCase()}
+            </div>
+          </div>
         </header>
+
         <main className="flex-1 p-4 lg:p-6 overflow-auto">{children}</main>
       </div>
     </div>
