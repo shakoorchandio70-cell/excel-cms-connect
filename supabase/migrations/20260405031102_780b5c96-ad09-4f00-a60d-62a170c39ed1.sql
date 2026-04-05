@@ -1,0 +1,1 @@
+ALTER TABLE public.complaints ADD COLUMN category_other text DEFAULT NULL;
