@@ -56,12 +56,12 @@ const AuthPage = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-sm font-medium tracking-wide"
             style={{ background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.9)", backdropFilter: "blur(8px)" }}>
             <Zap className="h-4 w-4" />
-            Enterprise-Grade Platform
+            E&M Section CATI
           </div>
 
           <h1 className="text-3xl lg:text-[2.75rem] lg:leading-[1.15] font-bold tracking-tight mb-5"
             style={{ color: "white" }}>
-            Smart Complaint Management for Modern Infrastructure
+            Smart Complaint Management
           </h1>
           <p className="text-base lg:text-lg mb-10 leading-relaxed"
             style={{ color: "rgba(255,255,255,0.7)" }}>
@@ -72,7 +72,7 @@ const AuthPage = () => {
           <div className="flex flex-wrap gap-6 lg:gap-10 justify-center lg:justify-start">
             {[
               { icon: CheckCircle2, value: "2,400+", label: "Resolved" },
-              { icon: Users, value: "45+", label: "Technicians" },
+              { icon: Users, value: "Skilled", label: "Technicians" },
               { icon: Zap, value: "99.9%", label: "Uptime" },
             ].map((stat) => (
               <div key={stat.label} className="flex items-center gap-3">
