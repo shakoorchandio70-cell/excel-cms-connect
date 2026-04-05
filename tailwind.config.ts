@@ -61,6 +61,16 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        aurora: {
+          cyan: "#00D4FF",
+          purple: "#8B5CF6",
+          amber: "#F59E0B",
+          green: "#10B981",
+          red: "#EF4444",
+          surface: "#12161F",
+          navbar: "#0C1018",
+          bg: "#07090F",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -69,20 +79,12 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
