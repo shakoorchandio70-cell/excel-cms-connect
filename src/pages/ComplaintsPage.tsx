@@ -511,11 +511,11 @@ const ComplaintsPage = () => {
 function ComplaintForm({ onSubmit, loading, isAdmin, userSection }: { onSubmit: (data: any) => void; loading: boolean; isAdmin: boolean; userSection: string }) {
   const [form, setForm] = useState({
     title: "", description: "", category: "AC not working", section: isAdmin ? "ANS - ATS Block" : userSection,
-    priority: "Medium", complainant_name: "", complainant_email: "", complainant_phone: "",
+    priority: "Medium", complainant_name: "", complainant_email: "", complainant_phone: "", category_other: "",
   });
 
   return (
-    <form onSubmit={(e) => { e.preventDefault(); onSubmit(form); }} className="space-y-4">
+    <form onSubmit={(e) => { e.preventDefault(); if (form.category === "Other" && !form.category_other.trim()) return; onSubmit(form); }} className="space-y-4">
       <div className="space-y-2">
         <Label>Title *</Label>
         <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required />
@@ -527,10 +527,19 @@ function ComplaintForm({ onSubmit, loading, isAdmin, userSection }: { onSubmit: 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label>Category</Label>
-          <Select value={form.category} onValueChange={(v) => setForm({ ...form, category: v })}>
+          <Select value={form.category} onValueChange={(v) => setForm({ ...form, category: v, category_other: v === "Other" ? form.category_other : "" })}>
             <SelectTrigger><SelectValue /></SelectTrigger>
-            <SelectContent>{CATEGORIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}</SelectContent>
+            <SelectContent>
+              {CATEGORIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+              <SelectItem value="Other">Other</SelectItem>
+            </SelectContent>
           </Select>
+          {form.category === "Other" && (
+            <div className="space-y-1 mt-2">
+              <Label>Please Specify Category *</Label>
+              <Input value={form.category_other} onChange={(e) => setForm({ ...form, category_other: e.target.value })} required placeholder="Enter category..." />
+            </div>
+          )}
         </div>
         <div className="space-y-2">
           <Label>Location</Label>
