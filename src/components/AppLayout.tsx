@@ -2,11 +2,12 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useUserRole } from "@/hooks/useUserRole";
 import { Button } from "@/components/ui/button";
 import { 
-  LayoutDashboard, FileText, LogOut, ShieldCheck, Menu, X, Package, User 
+  LayoutDashboard, FileText, LogOut, Menu, X, Package, User 
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import NotificationBell from "@/components/NotificationBell";
+import BrandLogo from "@/components/BrandLogo";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const { user, signOut } = useAuth();
@@ -31,14 +32,8 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
         }`}
       >
         <div className="flex flex-col h-full">
-          <div className="flex items-center gap-3 p-6 border-b border-sidebar-border">
-            <div className="h-9 w-9 rounded-lg bg-sidebar-primary flex items-center justify-center">
-              <ShieldCheck className="h-5 w-5 text-sidebar-primary-foreground" />
-            </div>
-            <div>
-              <h2 className="font-semibold text-sm text-sidebar-foreground">CATI E&M</h2>
-              <p className="text-xs text-sidebar-foreground/60">Complaint Management</p>
-            </div>
+          <div className="p-6 border-b border-sidebar-border">
+            <BrandLogo size={36} />
           </div>
 
           <nav className="flex-1 p-4 space-y-1">
