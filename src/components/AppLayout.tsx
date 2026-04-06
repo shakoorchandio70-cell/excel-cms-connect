@@ -57,10 +57,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
               </Link>
             );
           })}
-        </nav>
-
-        {/* Bottom: Settings + Logout */}
-        <div className="flex flex-col gap-1 mb-2 px-3">
+          {/* Settings */}
           <button
             title="Settings"
             className="flex items-center gap-3 px-3 h-10 rounded-lg transition-colors text-sm font-medium"
@@ -69,6 +66,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
             <Settings className="h-5 w-5 shrink-0" />
             <span>Settings</span>
           </button>
+          {/* Sign Out */}
           <button
             onClick={signOut}
             title="Sign Out"
@@ -78,7 +76,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
             <LogOut className="h-5 w-5 shrink-0" />
             <span>Sign Out</span>
           </button>
-        </div>
+        </nav>
       </aside>
 
       {/* Overlay (mobile) */}
