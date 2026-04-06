@@ -60,21 +60,23 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
         </nav>
 
         {/* Bottom: Settings + Logout */}
-        <div className="flex flex-col items-center gap-1 mb-2">
+        <div className="flex flex-col gap-1 mb-2 px-3">
           <button
             title="Settings"
-            className="w-9 h-9 flex items-center justify-center rounded-lg transition-colors"
-            style={{ color: '#475569' }}
+            className="flex items-center gap-3 px-3 h-10 rounded-lg transition-colors text-sm font-medium"
+            style={{ color: '#94A3B8' }}
           >
-            <Settings className="h-[18px] w-[18px]" />
+            <Settings className="h-5 w-5 shrink-0" />
+            <span>Settings</span>
           </button>
           <button
             onClick={signOut}
             title="Sign Out"
-            className="w-9 h-9 flex items-center justify-center rounded-lg transition-colors"
-            style={{ color: '#475569' }}
+            className="flex items-center gap-3 px-3 h-10 rounded-lg transition-colors text-sm font-medium"
+            style={{ color: '#94A3B8' }}
           >
-            <LogOut className="h-[18px] w-[18px]" />
+            <LogOut className="h-5 w-5 shrink-0" />
+            <span>Sign Out</span>
           </button>
         </div>
       </aside>
