@@ -153,6 +153,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
         </header>
 
         <main className="flex-1 p-4 lg:p-6 overflow-auto">{children}</main>
+        <AIChatFAB userRole={isAdmin ? "admin" : isTechnician ? "technician" : "official"} />
       </div>
     </div>
   );
