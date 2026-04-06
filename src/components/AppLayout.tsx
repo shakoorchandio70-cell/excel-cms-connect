@@ -8,6 +8,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import NotificationBell from "@/components/NotificationBell";
 import { CatiLogo } from "@/components/BrandLogo";
+import AIChatFAB from "@/components/AIChatFAB";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const { user, signOut } = useAuth();
@@ -152,6 +153,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
         </header>
 
         <main className="flex-1 p-4 lg:p-6 overflow-auto">{children}</main>
+        <AIChatFAB userRole={isAdmin ? "admin" : isTechnician ? "technician" : "official"} />
       </div>
     </div>
   );
