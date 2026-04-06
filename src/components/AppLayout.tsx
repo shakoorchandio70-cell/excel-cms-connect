@@ -27,18 +27,18 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="min-h-screen flex" style={{ background: '#07090F' }}>
       {/* Slim Icon Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-[52px] flex flex-col items-center py-4 transition-transform duration-200 lg:translate-x-0 lg:static ${
+        className={`fixed inset-y-0 left-0 z-50 w-[180px] flex flex-col py-4 transition-transform duration-200 lg:translate-x-0 lg:static ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         style={{ background: '#0C1018', borderRight: '1px solid #1E2535' }}
       >
         {/* Logo */}
-        <div className="mb-6">
+        <div className="mb-6 px-4">
           <CatiLogo size={28} />
         </div>
 
-        {/* Nav Icons */}
-        <nav className="flex-1 flex flex-col items-center gap-1">
+        {/* Nav Items */}
+        <nav className="flex-1 flex flex-col gap-1 px-3">
           {navItems.map((item) => {
             const active = location.pathname === item.href;
             return (
@@ -46,14 +46,14 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
                 key={item.href}
                 to={item.href}
                 onClick={() => setSidebarOpen(false)}
-                title={item.label}
-                className="w-9 h-9 flex items-center justify-center rounded-lg transition-colors"
+                className="flex items-center gap-3 px-3 h-10 rounded-lg transition-colors text-sm font-medium"
                 style={{
                   background: active ? 'rgba(0,212,255,0.12)' : 'transparent',
-                  color: active ? '#00D4FF' : '#475569',
+                  color: active ? '#00D4FF' : '#94A3B8',
                 }}
               >
-                <item.icon className="h-[18px] w-[18px]" />
+                <item.icon className="h-5 w-5 shrink-0" />
+                <span>{item.label}</span>
               </Link>
             );
           })}
