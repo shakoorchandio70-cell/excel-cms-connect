@@ -28,8 +28,27 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: '#07090F' }}>
-      <div className="w-full max-w-[420px] px-6">
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden" style={{ background: '#07090F' }}>
+      {/* Gradient blobs */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 50% at 15% 20%, rgba(0,212,255,0.05) 0%, transparent 70%)', animation: 'auth-pulse-glow 8s ease-in-out infinite' }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 60% at 85% 80%, rgba(139,92,246,0.04) 0%, transparent 70%)', animation: 'auth-pulse-glow 8s ease-in-out infinite 4s' }} />
+      {/* Dot grid */}
+      <div className="absolute inset-0 pointer-events-none opacity-30" style={{ backgroundImage: 'radial-gradient(circle, #1E2535 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+      {/* Floating hexagons */}
+      <svg className="absolute pointer-events-none" width="120" height="120" viewBox="0 0 120 120" style={{ top: '10%', left: '8%', opacity: 0.06, animation: 'auth-float-1 20s ease-in-out infinite' }}>
+        <path d="M101.6,84 L60,108 L18.4,84 L18.4,36 L60,12 L101.6,36 Z" fill="none" stroke="#00D4FF" strokeWidth="1.5"/>
+      </svg>
+      <svg className="absolute pointer-events-none" width="80" height="80" viewBox="0 0 120 120" style={{ top: '60%', right: '12%', opacity: 0.05, animation: 'auth-float-2 25s ease-in-out infinite' }}>
+        <path d="M101.6,84 L60,108 L18.4,84 L18.4,36 L60,12 L101.6,36 Z" fill="none" stroke="#8B5CF6" strokeWidth="1.5"/>
+      </svg>
+      <svg className="absolute pointer-events-none" width="60" height="60" viewBox="0 0 120 120" style={{ bottom: '15%', left: '20%', opacity: 0.04, animation: 'auth-float-3 18s ease-in-out infinite' }}>
+        <path d="M101.6,84 L60,108 L18.4,84 L18.4,36 L60,12 L101.6,36 Z" fill="none" stroke="#00D4FF" strokeWidth="1.5"/>
+      </svg>
+      <svg className="absolute pointer-events-none" width="100" height="100" viewBox="0 0 120 120" style={{ top: '25%', right: '30%', opacity: 0.03, animation: 'auth-float-1 22s ease-in-out infinite 3s' }}>
+        <path d="M101.6,84 L60,108 L18.4,84 L18.4,36 L60,12 L101.6,36 Z" fill="none" stroke="#8B5CF6" strokeWidth="1.5"/>
+      </svg>
+
+      <div className="w-full max-w-[420px] px-6 relative z-10">
         {/* Card */}
         <div className="rounded-xl p-8" style={{ background: '#12161F', border: '1px solid #1E2535' }}>
           {/* Logo */}
