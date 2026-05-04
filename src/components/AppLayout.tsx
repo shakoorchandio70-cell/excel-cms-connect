@@ -34,8 +34,9 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
         style={{ background: '#0F2A1E', borderRight: '1px solid #E4E8DD' }}
       >
         {/* Logo */}
-        <div className="mb-6 px-4">
-          <CatiLogo size={28} />
+        <div className="mb-6 px-4 flex items-center gap-2">
+          <CatiLogo size={28} variant="light" />
+          <span className="text-sm font-semibold tracking-wide" style={{ color: '#F7F8F4' }}>E&amp;M CMS</span>
         </div>
 
         {/* Nav Items */}
