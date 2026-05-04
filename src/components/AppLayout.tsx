@@ -49,8 +49,8 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
                 onClick={() => setSidebarOpen(false)}
                 className="flex items-center gap-3 px-3 h-10 rounded-lg transition-colors text-sm font-medium"
                 style={{
-                  background: active ? 'rgba(101,163,13,0.12)' : 'transparent',
-                  color: active ? '#65A30D' : '#475569',
+                  background: active ? 'rgba(190,242,100,0.15)' : 'transparent',
+                  color: active ? '#BEF264' : '#94A3B8',
                 }}
               >
                 <item.icon className="h-5 w-5 shrink-0" />
@@ -72,7 +72,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
             onClick={signOut}
             title="Sign Out"
             className="flex items-center gap-3 px-3 h-10 rounded-lg transition-colors text-sm font-medium"
-            style={{ color: '#475569' }}
+            style={{ color: '#94A3B8' }}
           >
             <LogOut className="h-5 w-5 shrink-0" />
             <span>Sign Out</span>
@@ -96,7 +96,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           className="flex items-center px-4 lg:px-6"
           style={{
             height: '54px',
-            background: '#0F2A1E',
+            background: '#FFFFFF',
             borderBottom: '1px solid #E4E8DD',
           }}
         >
