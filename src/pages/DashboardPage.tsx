@@ -69,19 +69,19 @@ const DashboardPage = () => {
   const reopenRate = totalFeedback > 0 ? ((totalReopened / totalFeedback) * 100).toFixed(1) : "0";
 
   const statCards = [
-    { label: "Total Complaints", value: stats.total, icon: FileText, color: "#00D4FF" },
-    { label: "Open", value: stats.open, icon: AlertCircle, color: "#8B5CF6" },
-    { label: "In Progress", value: stats.inProgress, icon: Clock, color: "#00D4FF" },
-    { label: "Resolved", value: stats.resolved, icon: CheckCircle2, color: "#10B981" },
+    { label: "Total Complaints", value: stats.total, icon: FileText, color: "#65A30D" },
+    { label: "Open", value: stats.open, icon: AlertCircle, color: "#7C3AED" },
+    { label: "In Progress", value: stats.inProgress, icon: Clock, color: "#65A30D" },
+    { label: "Resolved", value: stats.resolved, icon: CheckCircle2, color: "#16A34A" },
     { label: "Completed", value: stats.completed, icon: XCircle, color: "#64748B" },
-    { label: "Critical/Urgent", value: stats.critical, icon: TrendingUp, color: "#EF4444" },
+    { label: "Critical/Urgent", value: stats.critical, icon: TrendingUp, color: "#DC2626" },
   ];
 
   const feedbackCards = [
-    { label: "Average Rating", value: avgRating, icon: Star, color: "#F59E0B" },
-    { label: "Total Completed", value: stats.completed, icon: CheckCircle2, color: "#10B981" },
-    { label: "Total Reopened", value: stats.reopened, icon: RotateCcw, color: "#EF4444" },
-    { label: "Reopen Rate %", value: `${reopenRate}%`, icon: Percent, color: "#8B5CF6" },
+    { label: "Average Rating", value: avgRating, icon: Star, color: "#D97706" },
+    { label: "Total Completed", value: stats.completed, icon: CheckCircle2, color: "#16A34A" },
+    { label: "Total Reopened", value: stats.reopened, icon: RotateCcw, color: "#DC2626" },
+    { label: "Reopen Rate %", value: `${reopenRate}%`, icon: Percent, color: "#7C3AED" },
   ];
 
   const recentComplaints = relevantComplaints.slice(0, 5);
@@ -89,7 +89,7 @@ const DashboardPage = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold" style={{ color: '#F1F5F9' }}>CATI E&M Dashboard</h2>
+        <h2 className="text-2xl font-bold" style={{ color: '#0F1F17' }}>CATI E&M Dashboard</h2>
         <p style={{ color: '#64748B' }}>
           {isTechnician && !isAdmin ? "Your assigned tasks overview" : "Overview of your complaint management system"}
         </p>
@@ -97,8 +97,8 @@ const DashboardPage = () => {
 
       {isAdmin && (
         <Alert style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)' }}>
-          <AlertTriangle className="h-4 w-4" style={{ color: '#F59E0B' }} />
-          <AlertDescription className="text-sm" style={{ color: '#F59E0B' }}>
+          <AlertTriangle className="h-4 w-4" style={{ color: '#D97706' }} />
+          <AlertDescription className="text-sm" style={{ color: '#D97706' }}>
             SMS notifications are not configured. Connect Twilio to enable SMS alerts to complainants on resolution.
           </AlertDescription>
         </Alert>
@@ -110,7 +110,7 @@ const DashboardPage = () => {
           <div
             key={stat.label}
             className="rounded-[10px] p-4"
-            style={{ background: '#12161F', border: '1px solid #1E2535' }}
+            style={{ background: '#FFFFFF', border: '1px solid #E4E8DD' }}
           >
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs" style={{ color: '#64748B' }}>{stat.label}</p>
@@ -121,7 +121,7 @@ const DashboardPage = () => {
                 <stat.icon className="h-3.5 w-3.5" style={{ color: stat.color }} />
               </div>
             </div>
-            <p className="text-2xl font-bold" style={{ color: '#F1F5F9' }}>{stat.value}</p>
+            <p className="text-2xl font-bold" style={{ color: '#0F1F17' }}>{stat.value}</p>
           </div>
         ))}
       </div>
@@ -133,7 +133,7 @@ const DashboardPage = () => {
             <div
               key={stat.label}
               className="rounded-[10px] p-4"
-              style={{ background: '#12161F', border: '1px solid #1E2535' }}
+              style={{ background: '#FFFFFF', border: '1px solid #E4E8DD' }}
             >
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs" style={{ color: '#64748B' }}>{stat.label}</p>
@@ -144,16 +144,16 @@ const DashboardPage = () => {
                   <stat.icon className="h-3.5 w-3.5" style={{ color: stat.color }} />
                 </div>
               </div>
-              <p className="text-2xl font-bold" style={{ color: '#F1F5F9' }}>{stat.value}</p>
+              <p className="text-2xl font-bold" style={{ color: '#0F1F17' }}>{stat.value}</p>
             </div>
           ))}
         </div>
       )}
 
       {/* Recent Complaints */}
-      <div className="rounded-[10px]" style={{ background: '#12161F', border: '1px solid #1E2535' }}>
+      <div className="rounded-[10px]" style={{ background: '#FFFFFF', border: '1px solid #E4E8DD' }}>
         <div className="p-5 pb-0">
-          <h3 className="text-base font-semibold" style={{ color: '#F1F5F9' }}>Recent Complaints</h3>
+          <h3 className="text-base font-semibold" style={{ color: '#0F1F17' }}>Recent Complaints</h3>
         </div>
         <div className="p-5">
           {recentComplaints.length === 0 ? (
@@ -164,7 +164,7 @@ const DashboardPage = () => {
                 <div
                   key={c.id}
                   className="flex items-center justify-between p-3 rounded-lg"
-                  style={{ borderBottom: '1px solid #1A202E' }}
+                  style={{ borderBottom: '1px solid #EDF1E6' }}
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
@@ -184,12 +184,12 @@ const DashboardPage = () => {
                           ? { background: 'rgba(100,116,139,0.12)', color: '#64748B' } : {}
                       }>{c.priority}</span>
                       {c.status === "Reopened" && c.reopen_count > 0 && (
-                        <span className="text-xs px-1.5 py-0.5 rounded-full" style={{ background: '#EF4444', color: '#fff' }}>
+                        <span className="text-xs px-1.5 py-0.5 rounded-full" style={{ background: '#DC2626', color: '#fff' }}>
                           Reopened ×{c.reopen_count}
                         </span>
                       )}
                     </div>
-                    <p className="text-sm font-medium mt-1 truncate" style={{ color: '#E2E8F0' }}>{c.title}</p>
+                    <p className="text-sm font-medium mt-1 truncate" style={{ color: '#1F2937' }}>{c.title}</p>
                   </div>
                   <span className="text-xs whitespace-nowrap ml-4" style={{ color: '#64748B' }}>
                     {new Date(c.created_at).toLocaleDateString()}
@@ -203,28 +203,28 @@ const DashboardPage = () => {
 
       {/* Feedback Table (Admin only) */}
       {isAdmin && completedFeedback.length > 0 && (
-        <div className="rounded-[10px] overflow-hidden" style={{ background: '#12161F', border: '1px solid #1E2535' }}>
+        <div className="rounded-[10px] overflow-hidden" style={{ background: '#FFFFFF', border: '1px solid #E4E8DD' }}>
           <div className="p-5 pb-0">
-            <h3 className="text-base font-semibold" style={{ color: '#F1F5F9' }}>Feedback Overview</h3>
+            <h3 className="text-base font-semibold" style={{ color: '#0F1F17' }}>Feedback Overview</h3>
           </div>
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow style={{ borderBottom: '1px solid #1E2535' }}>
-                  <TableHead style={{ color: '#475569' }}>Complaint</TableHead>
-                  <TableHead style={{ color: '#475569' }}>Technician</TableHead>
-                  <TableHead style={{ color: '#475569' }}>Rating</TableHead>
-                  <TableHead style={{ color: '#475569' }}>Status</TableHead>
-                  <TableHead style={{ color: '#475569' }}>Date</TableHead>
+                <TableRow style={{ borderBottom: '1px solid #E4E8DD' }}>
+                  <TableHead style={{ color: '#94A3B8' }}>Complaint</TableHead>
+                  <TableHead style={{ color: '#94A3B8' }}>Technician</TableHead>
+                  <TableHead style={{ color: '#94A3B8' }}>Rating</TableHead>
+                  <TableHead style={{ color: '#94A3B8' }}>Status</TableHead>
+                  <TableHead style={{ color: '#94A3B8' }}>Date</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {feedbackList.slice(0, 10).map((fb: any) => {
                   const complaint = complaints.find((c) => c.id === fb.complaint_id);
                   return (
-                    <TableRow key={fb.id} style={{ borderBottom: '1px solid #1A202E' }}>
-                      <TableCell className="text-xs font-mono" style={{ color: '#E2E8F0' }}>{complaint?.complaint_number || "—"}</TableCell>
-                      <TableCell className="text-sm" style={{ color: '#E2E8F0' }}>{complaint?.assigned_to ? profileMap[complaint.assigned_to]?.full_name || "—" : "—"}</TableCell>
+                    <TableRow key={fb.id} style={{ borderBottom: '1px solid #EDF1E6' }}>
+                      <TableCell className="text-xs font-mono" style={{ color: '#1F2937' }}>{complaint?.complaint_number || "—"}</TableCell>
+                      <TableCell className="text-sm" style={{ color: '#1F2937' }}>{complaint?.assigned_to ? profileMap[complaint.assigned_to]?.full_name || "—" : "—"}</TableCell>
                       <TableCell>{fb.rating ? <StarRating value={fb.rating} readonly size="sm" /> : "—"}</TableCell>
                       <TableCell>
                         <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${fb.action === "completed" ? "status-resolved" : "status-reopened"}`}>

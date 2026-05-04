@@ -6,66 +6,52 @@
 
 @layer base {
   :root {
-    --background: 220 30% 5%;
-    --foreground: 210 25% 96%;
+    --background: 80 25% 97%;
+    --foreground: 150 30% 10%;
 
-    --card: 220 25% 10%;
-    --card-foreground: 210 25% 96%;
+    --card: 0 0% 100%;
+    --card-foreground: 150 30% 10%;
 
-    --popover: 220 25% 10%;
-    --popover-foreground: 210 25% 96%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 30% 10%;
 
-    --primary: 190 100% 50%;
-    --primary-foreground: 220 30% 5%;
+    --primary: 82 78% 35%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 20% 14%;
-    --secondary-foreground: 215 20% 72%;
+    --secondary: 80 20% 94%;
+    --secondary-foreground: 150 25% 20%;
 
-    --muted: 220 18% 12%;
+    --muted: 80 18% 94%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 190 100% 50%;
-    --accent-foreground: 220 30% 5%;
+    --accent: 82 78% 42%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 25% 96%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 20% 16%;
-    --border-subtle: 220 18% 14%;
-    --input: 220 25% 10%;
-    --ring: 190 100% 50%;
+    --border: 80 18% 88%;
+    --border-subtle: 80 18% 92%;
+    --input: 80 18% 88%;
+    --ring: 82 78% 42%;
 
     --radius: 0.5rem;
 
-    --status-open: 260 91% 66%;
-    --status-in-progress: 190 100% 50%;
-    --status-resolved: 160 59% 52%;
+    --status-open: 262 83% 58%;
+    --status-in-progress: 82 78% 42%;
+    --status-resolved: 142 71% 45%;
     --status-closed: 215 16% 47%;
-    --status-critical: 0 84% 60%;
-    --status-pending: 38 92% 50%;
+    --status-critical: 0 72% 50%;
+    --status-pending: 32 95% 44%;
 
-    --sidebar-background: 220 22% 6%;
-    --sidebar-foreground: 215 16% 47%;
-    --sidebar-primary: 190 100% 50%;
-    --sidebar-primary-foreground: 220 30% 5%;
-    --sidebar-accent: 190 100% 50%;
-    --sidebar-accent-foreground: 190 100% 50%;
-    --sidebar-border: 220 20% 16%;
-    --sidebar-ring: 190 100% 50%;
-
-    --aurora-navbar: #0C1018;
-    --aurora-surface: #12161F;
-    --aurora-border: #1E2535;
-    --aurora-border-subtle: #1A202E;
-    --aurora-cyan: #00D4FF;
-    --aurora-purple: #8B5CF6;
-    --aurora-amber: #F59E0B;
-    --aurora-green: #10B981;
-    --aurora-red: #EF4444;
-    --aurora-text: #F1F5F9;
-    --aurora-text-secondary: #94A3B8;
-    --aurora-text-muted: #64748B;
-    --aurora-text-hint: #475569;
+    --sidebar-background: 150 47% 12%;
+    --sidebar-foreground: 215 16% 70%;
+    --sidebar-primary: 82 90% 67%;
+    --sidebar-primary-foreground: 150 47% 12%;
+    --sidebar-accent: 82 90% 67%;
+    --sidebar-accent-foreground: 82 90% 67%;
+    --sidebar-border: 150 30% 20%;
+    --sidebar-ring: 82 90% 67%;
   }
 }
 
@@ -76,26 +62,26 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    background-color: #07090F;
+    background-color: #F7F8F4;
   }
 }
 
 @layer utilities {
   .status-open {
-    background: rgba(139, 92, 246, 0.12);
-    color: #8B5CF6;
+    background: rgba(124, 58, 237, 0.10);
+    color: #7C3AED;
   }
   .status-in-progress {
-    background: rgba(0, 212, 255, 0.12);
-    color: #00D4FF;
+    background: rgba(101, 163, 13, 0.12);
+    color: #4D7C0F;
   }
   .status-resolved {
-    background: rgba(16, 185, 129, 0.12);
-    color: #10B981;
+    background: rgba(22, 163, 74, 0.12);
+    color: #15803D;
   }
   .status-closed {
     background: rgba(100, 116, 139, 0.12);
-    color: #64748B;
+    color: #475569;
   }
   .status-completed {
     background: rgba(100, 116, 139, 0.12);
@@ -103,15 +89,15 @@
   }
   .status-reopened {
     background: rgba(239, 68, 68, 0.12);
-    color: #EF4444;
+    color: #DC2626;
   }
   .status-critical {
     background: rgba(239, 68, 68, 0.12);
-    color: #EF4444;
+    color: #DC2626;
   }
   .status-pending {
     background: rgba(245, 158, 11, 0.12);
-    color: #F59E0B;
+    color: #D97706;
   }
 }
 

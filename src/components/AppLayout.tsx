@@ -25,17 +25,18 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   ];
 
   return (
-    <div className="min-h-screen flex" style={{ background: '#07090F' }}>
+    <div className="min-h-screen flex" style={{ background: '#F7F8F4' }}>
       {/* Slim Icon Sidebar */}
       <aside
         className={`fixed inset-y-0 left-0 z-50 w-[180px] flex flex-col py-4 transition-transform duration-200 lg:translate-x-0 lg:static ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        style={{ background: '#0C1018', borderRight: '1px solid #1E2535' }}
+        style={{ background: '#0F2A1E', borderRight: '1px solid #E4E8DD' }}
       >
         {/* Logo */}
-        <div className="mb-6 px-4">
-          <CatiLogo size={28} />
+        <div className="mb-6 px-4 flex items-center gap-2">
+          <CatiLogo size={28} variant="light" />
+          <span className="text-sm font-semibold tracking-wide" style={{ color: '#F7F8F4' }}>E&amp;M CMS</span>
         </div>
 
         {/* Nav Items */}
@@ -49,8 +50,8 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
                 onClick={() => setSidebarOpen(false)}
                 className="flex items-center gap-3 px-3 h-10 rounded-lg transition-colors text-sm font-medium"
                 style={{
-                  background: active ? 'rgba(0,212,255,0.12)' : 'transparent',
-                  color: active ? '#00D4FF' : '#94A3B8',
+                  background: active ? 'rgba(190,242,100,0.15)' : 'transparent',
+                  color: active ? '#BEF264' : '#94A3B8',
                 }}
               >
                 <item.icon className="h-5 w-5 shrink-0" />
@@ -62,7 +63,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           <button
             title="Settings"
             className="flex items-center gap-3 px-3 h-10 rounded-lg transition-colors text-sm font-medium"
-            style={{ color: '#94A3B8' }}
+            style={{ color: '#475569' }}
           >
             <Settings className="h-5 w-5 shrink-0" />
             <span>Settings</span>
@@ -96,8 +97,8 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           className="flex items-center px-4 lg:px-6"
           style={{
             height: '54px',
-            background: '#0C1018',
-            borderBottom: '1px solid #1E2535',
+            background: '#FFFFFF',
+            borderBottom: '1px solid #E4E8DD',
           }}
         >
           <Button
@@ -105,35 +106,35 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
             size="icon"
             className="lg:hidden mr-2"
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            style={{ color: '#94A3B8' }}
+            style={{ color: '#475569' }}
           >
             {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
 
           {/* Brand text */}
           <div className="flex items-center gap-2 mr-4">
-            <span className="text-sm font-semibold hidden lg:inline" style={{ color: '#F1F5F9' }}>E&M CMS</span>
+            <span className="text-sm font-semibold hidden lg:inline" style={{ color: '#0F1F17' }}>E&M CMS</span>
           </div>
 
           {/* Search bar (center) */}
           <div className="flex-1 max-w-md mx-auto hidden md:block">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: '#475569' }} />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: '#94A3B8' }} />
               <input
                 type="text"
                 placeholder="Search..."
                 className="w-full h-9 pl-9 pr-4 text-sm rounded-[7px] outline-none transition-all duration-200"
                 style={{
-                  background: '#12161F',
-                  border: '1px solid #1E2535',
-                  color: '#F1F5F9',
+                  background: '#FFFFFF',
+                  border: '1px solid #E4E8DD',
+                  color: '#0F1F17',
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = '#00D4FF';
-                  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0,212,255,0.15)';
+                  e.currentTarget.style.borderColor = '#65A30D';
+                  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(101,163,13,0.15)';
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = '#1E2535';
+                  e.currentTarget.style.borderColor = '#E4E8DD';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               />
@@ -145,7 +146,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
             {showBell && <NotificationBell />}
             <div
               className="h-8 w-8 rounded-full flex items-center justify-center text-xs font-semibold"
-              style={{ background: 'rgba(0,212,255,0.15)', color: '#00D4FF' }}
+              style={{ background: 'rgba(101,163,13,0.15)', color: '#65A30D' }}
             >
               {user?.email?.charAt(0).toUpperCase()}
             </div>

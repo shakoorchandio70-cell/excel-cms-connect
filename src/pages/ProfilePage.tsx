@@ -56,46 +56,46 @@ const ProfilePage = () => {
   return (
     <div className="max-w-lg mx-auto space-y-6">
       <div>
-        <h2 className="text-2xl font-bold" style={{ color: '#F1F5F9' }}>Profile Settings</h2>
+        <h2 className="text-2xl font-bold" style={{ color: '#0F1F17' }}>Profile Settings</h2>
         <p style={{ color: '#64748B' }}>Manage your account details</p>
       </div>
 
-      <div className="rounded-[10px] p-6" style={{ background: '#12161F', border: '1px solid #1E2535' }}>
+      <div className="rounded-[10px] p-6" style={{ background: '#FFFFFF', border: '1px solid #E4E8DD' }}>
         <div className="flex items-center gap-2 mb-5">
-          <User className="h-4 w-4" style={{ color: '#00D4FF' }} />
-          <h3 className="text-base font-semibold" style={{ color: '#F1F5F9' }}>Profile Information</h3>
+          <User className="h-4 w-4" style={{ color: '#65A30D' }} />
+          <h3 className="text-base font-semibold" style={{ color: '#0F1F17' }}>Profile Information</h3>
         </div>
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label style={{ color: '#94A3B8' }}>Full Name</Label>
+            <Label style={{ color: '#475569' }}>Full Name</Label>
             <Input
               value={form.full_name}
               onChange={(e) => setForm({ ...form, full_name: e.target.value })}
-              style={{ background: '#12161F', border: '1px solid #1E2535', color: '#F1F5F9', borderRadius: '7px' }}
+              style={{ background: '#FFFFFF', border: '1px solid #E4E8DD', color: '#0F1F17', borderRadius: '7px' }}
             />
           </div>
           <div className="space-y-2">
-            <Label style={{ color: '#94A3B8' }}>Login ID</Label>
-            <Input value={user?.email || ""} disabled style={{ background: '#0C1018', border: '1px solid #1E2535', color: '#64748B', borderRadius: '7px' }} />
+            <Label style={{ color: '#475569' }}>Login ID</Label>
+            <Input value={user?.email || ""} disabled style={{ background: '#0F2A1E', border: '1px solid #E4E8DD', color: '#64748B', borderRadius: '7px' }} />
           </div>
 
           <div className="space-y-2">
-            <Label style={{ color: '#94A3B8' }}>Email Address</Label>
+            <Label style={{ color: '#475569' }}>Email Address</Label>
             <Input
               type="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               placeholder="your.email@example.com"
-              style={{ background: '#12161F', border: '1px solid #1E2535', color: '#F1F5F9', borderRadius: '7px' }}
+              style={{ background: '#FFFFFF', border: '1px solid #E4E8DD', color: '#0F1F17', borderRadius: '7px' }}
             />
-            <p className="text-xs" style={{ color: '#475569' }}>Used for email notifications</p>
+            <p className="text-xs" style={{ color: '#94A3B8' }}>Used for email notifications</p>
           </div>
 
-          <div className="flex items-center justify-between rounded-lg p-3" style={{ border: '1px solid #1E2535' }}>
+          <div className="flex items-center justify-between rounded-lg p-3" style={{ border: '1px solid #E4E8DD' }}>
             <div className="space-y-0.5">
-              <Label className="text-sm font-medium" style={{ color: '#F1F5F9' }}>Email Notifications</Label>
-              <p className="text-xs" style={{ color: '#475569' }}>
+              <Label className="text-sm font-medium" style={{ color: '#0F1F17' }}>Email Notifications</Label>
+              <p className="text-xs" style={{ color: '#94A3B8' }}>
                 Receive email notifications for complaint updates and assignments
               </p>
             </div>
@@ -106,26 +106,26 @@ const ProfilePage = () => {
           </div>
 
           <div className="space-y-2">
-            <Label style={{ color: '#94A3B8' }}>Mobile Number</Label>
+            <Label style={{ color: '#475569' }}>Mobile Number</Label>
             <Input
               value={form.mobile_number}
               onChange={(e) => setForm({ ...form, mobile_number: e.target.value })}
               placeholder="+92 3XX XXXXXXX (include country code)"
-              style={{ background: '#12161F', border: '1px solid #1E2535', color: '#F1F5F9', borderRadius: '7px' }}
+              style={{ background: '#FFFFFF', border: '1px solid #E4E8DD', color: '#0F1F17', borderRadius: '7px' }}
             />
-            <p className="text-xs" style={{ color: '#475569' }}>Required to receive SMS notifications</p>
+            <p className="text-xs" style={{ color: '#94A3B8' }}>Required to receive SMS notifications</p>
           </div>
 
           {isAdmin && (
             <div className="space-y-2">
-              <Label style={{ color: '#94A3B8' }}>Daily Alert Time</Label>
+              <Label style={{ color: '#475569' }}>Daily Alert Time</Label>
               <Input
                 type="time"
                 value={form.daily_alert_time}
                 onChange={(e) => setForm({ ...form, daily_alert_time: e.target.value })}
-                style={{ background: '#12161F', border: '1px solid #1E2535', color: '#F1F5F9', borderRadius: '7px' }}
+                style={{ background: '#FFFFFF', border: '1px solid #E4E8DD', color: '#0F1F17', borderRadius: '7px' }}
               />
-              <p className="text-xs" style={{ color: '#475569' }}>Daily low stock summary will be sent at this time</p>
+              <p className="text-xs" style={{ color: '#94A3B8' }}>Daily low stock summary will be sent at this time</p>
             </div>
           )}
 
@@ -133,7 +133,7 @@ const ProfilePage = () => {
             onClick={handleSave}
             disabled={saving}
             className="w-full font-bold rounded-[7px]"
-            style={{ background: '#00D4FF', color: '#07090F' }}
+            style={{ background: '#65A30D', color: '#F7F8F4' }}
           >
             {saving ? <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Saving...</> : "Save Profile"}
           </Button>
