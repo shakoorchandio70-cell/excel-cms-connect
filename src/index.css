@@ -53,19 +53,19 @@
     --sidebar-border: 220 20% 16%;
     --sidebar-ring: 190 100% 50%;
 
-    --aurora-navbar: #0C1018;
-    --aurora-surface: #12161F;
-    --aurora-border: #1E2535;
-    --aurora-border-subtle: #1A202E;
-    --aurora-cyan: #00D4FF;
-    --aurora-purple: #8B5CF6;
-    --aurora-amber: #F59E0B;
-    --aurora-green: #10B981;
-    --aurora-red: #EF4444;
-    --aurora-text: #F1F5F9;
-    --aurora-text-secondary: #94A3B8;
+    --aurora-navbar: #0F2A1E;
+    --aurora-surface: #FFFFFF;
+    --aurora-border: #E4E8DD;
+    --aurora-border-subtle: #EDF1E6;
+    --aurora-cyan: #65A30D;
+    --aurora-purple: #7C3AED;
+    --aurora-amber: #D97706;
+    --aurora-green: #16A34A;
+    --aurora-red: #DC2626;
+    --aurora-text: #0F1F17;
+    --aurora-text-secondary: #475569;
     --aurora-text-muted: #64748B;
-    --aurora-text-hint: #475569;
+    --aurora-text-hint: #94A3B8;
   }
 }
 
@@ -76,22 +76,22 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    background-color: #07090F;
+    background-color: #F7F8F4;
   }
 }
 
 @layer utilities {
   .status-open {
-    background: rgba(139, 92, 246, 0.12);
-    color: #8B5CF6;
+    background: rgba(124,58,237, 0.12);
+    color: #7C3AED;
   }
   .status-in-progress {
     background: rgba(0, 212, 255, 0.12);
-    color: #00D4FF;
+    color: #65A30D;
   }
   .status-resolved {
     background: rgba(16, 185, 129, 0.12);
-    color: #10B981;
+    color: #16A34A;
   }
   .status-closed {
     background: rgba(100, 116, 139, 0.12);
@@ -103,15 +103,15 @@
   }
   .status-reopened {
     background: rgba(239, 68, 68, 0.12);
-    color: #EF4444;
+    color: #DC2626;
   }
   .status-critical {
     background: rgba(239, 68, 68, 0.12);
-    color: #EF4444;
+    color: #DC2626;
   }
   .status-pending {
     background: rgba(245, 158, 11, 0.12);
-    color: #F59E0B;
+    color: #D97706;
   }
 }
 
