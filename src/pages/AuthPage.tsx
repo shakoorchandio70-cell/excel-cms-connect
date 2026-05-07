@@ -22,45 +22,45 @@ const AuthPage = () => {
       toast.error(error.message);
     } else {
       toast.success("Logged in successfully");
-      navigate("/");
+      navigate("/dashboard");
     }
     setLoading(false);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden" style={{ background: '#F7F8F4' }}>
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden" style={{ background: '#F5F6F0' }}>
       {/* Gradient blobs */}
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 50% at 15% 20%, rgba(101,163,13,0.05) 0%, transparent 70%)', animation: 'auth-pulse-glow 8s ease-in-out infinite' }} />
-      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 60% at 85% 80%, rgba(124,58,237,0.04) 0%, transparent 70%)', animation: 'auth-pulse-glow 8s ease-in-out infinite 4s' }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 60% at 85% 80%, rgba(45,106,79,0.04) 0%, transparent 70%)', animation: 'auth-pulse-glow 8s ease-in-out infinite 4s' }} />
       {/* Dot grid */}
-      <div className="absolute inset-0 pointer-events-none opacity-30" style={{ backgroundImage: 'radial-gradient(circle, #E4E8DD 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+      <div className="absolute inset-0 pointer-events-none opacity-30" style={{ backgroundImage: 'radial-gradient(circle, #D4DCCE 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
       {/* Floating hexagons */}
       <svg className="absolute pointer-events-none" width="120" height="120" viewBox="0 0 120 120" style={{ top: '10%', left: '8%', opacity: 0.06, animation: 'auth-float-1 20s ease-in-out infinite' }}>
-        <path d="M101.6,84 L60,108 L18.4,84 L18.4,36 L60,12 L101.6,36 Z" fill="none" stroke="#65A30D" strokeWidth="1.5"/>
+        <path d="M101.6,84 L60,108 L18.4,84 L18.4,36 L60,12 L101.6,36 Z" fill="none" stroke="#76B041" strokeWidth="1.5"/>
       </svg>
       <svg className="absolute pointer-events-none" width="80" height="80" viewBox="0 0 120 120" style={{ top: '60%', right: '12%', opacity: 0.05, animation: 'auth-float-2 25s ease-in-out infinite' }}>
-        <path d="M101.6,84 L60,108 L18.4,84 L18.4,36 L60,12 L101.6,36 Z" fill="none" stroke="#7C3AED" strokeWidth="1.5"/>
+        <path d="M101.6,84 L60,108 L18.4,84 L18.4,36 L60,12 L101.6,36 Z" fill="none" stroke="#3D8C68" strokeWidth="1.5"/>
       </svg>
       <svg className="absolute pointer-events-none" width="60" height="60" viewBox="0 0 120 120" style={{ bottom: '15%', left: '20%', opacity: 0.04, animation: 'auth-float-3 18s ease-in-out infinite' }}>
-        <path d="M101.6,84 L60,108 L18.4,84 L18.4,36 L60,12 L101.6,36 Z" fill="none" stroke="#65A30D" strokeWidth="1.5"/>
+        <path d="M101.6,84 L60,108 L18.4,84 L18.4,36 L60,12 L101.6,36 Z" fill="none" stroke="#76B041" strokeWidth="1.5"/>
       </svg>
       <svg className="absolute pointer-events-none" width="100" height="100" viewBox="0 0 120 120" style={{ top: '25%', right: '30%', opacity: 0.03, animation: 'auth-float-1 22s ease-in-out infinite 3s' }}>
-        <path d="M101.6,84 L60,108 L18.4,84 L18.4,36 L60,12 L101.6,36 Z" fill="none" stroke="#7C3AED" strokeWidth="1.5"/>
+        <path d="M101.6,84 L60,108 L18.4,84 L18.4,36 L60,12 L101.6,36 Z" fill="none" stroke="#3D8C68" strokeWidth="1.5"/>
       </svg>
 
       <div className="w-full max-w-[420px] px-6 relative z-10">
         {/* Card */}
-        <div className="rounded-xl p-8" style={{ background: '#FFFFFF', border: '1px solid #E4E8DD' }}>
+        <div className="rounded-xl p-8" style={{ background: '#FFFFFF', border: '1px solid #D4DCCE' }}>
           {/* Logo */}
           <div className="flex items-center gap-3 mb-8">
             <CatiLogo size={36} />
             <div>
-              <p className="text-base font-semibold" style={{ color: '#0F1F17' }}>E&M CMS</p>
+              <p className="text-base font-semibold" style={{ color: '#1C1F1A' }}>E&M CMS</p>
               <p className="text-[11px]" style={{ color: '#94A3B8' }}>CATI · Hyderabad</p>
             </div>
           </div>
 
-          <h2 className="text-xl font-semibold mb-1" style={{ color: '#0F1F17' }}>
+          <h2 className="text-xl font-semibold mb-1" style={{ color: '#1C1F1A' }}>
             Sign in to your account
           </h2>
           <p className="text-sm mb-7" style={{ color: '#64748B' }}>
@@ -79,9 +79,9 @@ const AuthPage = () => {
                   required
                   placeholder="you@cati.local"
                   className="w-full h-12 pl-11 pr-4 rounded-[7px] text-sm outline-none transition-all duration-200"
-                  style={{ background: '#FFFFFF', border: '1px solid #E4E8DD', color: '#0F1F17' }}
-                  onFocus={(e) => { e.currentTarget.style.borderColor = '#65A30D'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(101,163,13,0.15)'; }}
-                  onBlur={(e) => { e.currentTarget.style.borderColor = '#E4E8DD'; e.currentTarget.style.boxShadow = 'none'; }}
+                  style={{ background: '#FFFFFF', border: '1px solid #D4DCCE', color: '#1C1F1A' }}
+                  onFocus={(e) => { e.currentTarget.style.borderColor = '#76B041'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(101,163,13,0.15)'; }}
+                  onBlur={(e) => { e.currentTarget.style.borderColor = '#D4DCCE'; e.currentTarget.style.boxShadow = 'none'; }}
                 />
               </div>
             </div>
@@ -97,15 +97,15 @@ const AuthPage = () => {
                   required
                   placeholder="••••••••"
                   className="w-full h-12 pl-11 pr-4 rounded-[7px] text-sm outline-none transition-all duration-200"
-                  style={{ background: '#FFFFFF', border: '1px solid #E4E8DD', color: '#0F1F17' }}
-                  onFocus={(e) => { e.currentTarget.style.borderColor = '#65A30D'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(101,163,13,0.15)'; }}
-                  onBlur={(e) => { e.currentTarget.style.borderColor = '#E4E8DD'; e.currentTarget.style.boxShadow = 'none'; }}
+                  style={{ background: '#FFFFFF', border: '1px solid #D4DCCE', color: '#1C1F1A' }}
+                  onFocus={(e) => { e.currentTarget.style.borderColor = '#76B041'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(101,163,13,0.15)'; }}
+                  onBlur={(e) => { e.currentTarget.style.borderColor = '#D4DCCE'; e.currentTarget.style.boxShadow = 'none'; }}
                 />
               </div>
             </div>
 
             <div className="flex justify-end">
-              <button type="button" className="text-xs font-medium hover:underline" style={{ color: '#65A30D' }}>
+              <button type="button" className="text-xs font-medium hover:underline" style={{ color: '#76B041' }}>
                 Forgot password?
               </button>
             </div>
@@ -114,22 +114,22 @@ const AuthPage = () => {
               type="submit"
               disabled={loading}
               className="w-full h-12 rounded-[7px] text-sm font-bold flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-60"
-              style={{ background: '#65A30D', color: '#F7F8F4' }}
+              style={{ background: '#76B041', color: '#F5F6F0' }}
             >
               {loading ? "Signing in..." : <>Sign in securely <ArrowRight className="h-4 w-4" /></>}
             </button>
           </form>
 
           <div className="flex items-center gap-3 my-6">
-            <div className="flex-1 h-px" style={{ background: '#E4E8DD' }} />
+            <div className="flex-1 h-px" style={{ background: '#D4DCCE' }} />
             <span className="text-xs font-medium" style={{ color: '#94A3B8' }}>OR</span>
-            <div className="flex-1 h-px" style={{ background: '#E4E8DD' }} />
+            <div className="flex-1 h-px" style={{ background: '#D4DCCE' }} />
           </div>
 
           <button
             type="button"
             className="w-full h-11 rounded-[7px] text-sm font-medium flex items-center justify-center gap-2 transition-all duration-200"
-            style={{ background: 'transparent', border: '1px solid #E4E8DD', color: '#475569' }}
+            style={{ background: 'transparent', border: '1px solid #D4DCCE', color: '#475569' }}
           >
             <ShieldCheck className="h-4 w-4" />
             Sign in with SSO
