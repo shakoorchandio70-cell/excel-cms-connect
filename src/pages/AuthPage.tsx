@@ -22,7 +22,7 @@ const AuthPage = () => {
       toast.error(error.message);
     } else {
       toast.success("Logged in successfully");
-      navigate("/");
+      navigate("/dashboard");
     }
     setLoading(false);
   };

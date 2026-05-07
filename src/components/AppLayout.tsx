@@ -18,7 +18,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const showBell = isTechnician && !isAdmin;
 
   const navItems = [
-    { label: "Dashboard", icon: LayoutDashboard, href: "/" },
+    { label: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
     { label: "Complaints", icon: FileText, href: "/complaints" },
     ...(isAdmin ? [{ label: "Inventory", icon: Package, href: "/inventory" }] : []),
     { label: "Profile", icon: User, href: "/profile" },
