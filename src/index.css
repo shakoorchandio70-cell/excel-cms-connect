@@ -2,103 +2,84 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 80 25% 97%;
-    --foreground: 150 30% 10%;
+    --background: 72 19% 95%;
+    --foreground: 80 8% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 150 30% 10%;
+    --card-foreground: 80 8% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 150 30% 10%;
+    --popover-foreground: 80 8% 11%;
 
-    --primary: 82 78% 35%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 87 47% 47%;
+    --primary-foreground: 150 47% 19%;
 
-    --secondary: 80 20% 94%;
-    --secondary-foreground: 150 25% 20%;
+    --secondary: 80 15% 92%;
+    --secondary-foreground: 150 47% 19%;
 
-    --muted: 80 18% 94%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 80 15% 92%;
+    --muted-foreground: 95 7% 37%;
 
-    --accent: 82 78% 42%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 87 53% 55%;
+    --accent-foreground: 150 47% 19%;
 
     --destructive: 0 72% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 80 18% 88%;
-    --border-subtle: 80 18% 92%;
-    --input: 80 18% 88%;
-    --ring: 82 78% 42%;
+    --border: 95 18% 84%;
+    --border-subtle: 95 18% 90%;
+    --input: 95 18% 84%;
+    --ring: 87 47% 47%;
 
     --radius: 0.5rem;
 
-    --status-open: 262 83% 58%;
-    --status-in-progress: 82 78% 42%;
-    --status-resolved: 142 71% 45%;
-    --status-closed: 215 16% 47%;
+    --status-open: 45 95% 55%;
+    --status-in-progress: 87 47% 47%;
+    --status-resolved: 142 50% 45%;
+    --status-closed: 95 7% 37%;
     --status-critical: 0 72% 50%;
     --status-pending: 32 95% 44%;
 
-    --sidebar-background: 150 47% 12%;
-    --sidebar-foreground: 215 16% 70%;
-    --sidebar-primary: 82 90% 67%;
-    --sidebar-primary-foreground: 150 47% 12%;
-    --sidebar-accent: 82 90% 67%;
-    --sidebar-accent-foreground: 82 90% 67%;
-    --sidebar-border: 150 30% 20%;
-    --sidebar-ring: 82 90% 67%;
+    --sidebar-background: 150 47% 19%;
+    --sidebar-foreground: 80 15% 80%;
+    --sidebar-primary: 82 56% 64%;
+    --sidebar-primary-foreground: 150 47% 19%;
+    --sidebar-accent: 82 56% 64%;
+    --sidebar-accent-foreground: 82 56% 64%;
+    --sidebar-border: 150 30% 25%;
+    --sidebar-ring: 82 56% 64%;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
+  * { @apply border-border; }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    background-color: #F7F8F4;
+    @apply bg-background text-foreground antialiased;
+    background-color: #F5F6F0;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Lora', serif;
   }
 }
 
 @layer utilities {
-  .status-open {
-    background: rgba(124, 58, 237, 0.10);
-    color: #7C3AED;
-  }
-  .status-in-progress {
-    background: rgba(101, 163, 13, 0.12);
-    color: #4D7C0F;
-  }
-  .status-resolved {
-    background: rgba(22, 163, 74, 0.12);
-    color: #15803D;
-  }
-  .status-closed {
-    background: rgba(100, 116, 139, 0.12);
-    color: #475569;
-  }
-  .status-completed {
-    background: rgba(100, 116, 139, 0.12);
-    color: #64748B;
-  }
-  .status-reopened {
-    background: rgba(239, 68, 68, 0.12);
-    color: #DC2626;
-  }
-  .status-critical {
-    background: rgba(239, 68, 68, 0.12);
-    color: #DC2626;
-  }
-  .status-pending {
-    background: rgba(245, 158, 11, 0.12);
-    color: #D97706;
-  }
+  .font-display { font-family: 'Lora', serif; }
+
+  .status-open { background: rgba(255,193,7,0.15); color: #B98700; }
+  .status-in-progress { background: rgba(118,176,65,0.15); color: #3D6B1F; }
+  .status-resolved { background: rgba(45,106,79,0.12); color: #1A4731; }
+  .status-closed { background: rgba(100,116,139,0.12); color: #475569; }
+  .status-completed { background: rgba(100,116,139,0.12); color: #5A6358; }
+  .status-reopened { background: rgba(239,68,68,0.12); color: #DC2626; }
+  .status-critical { background: rgba(239,68,68,0.12); color: #DC2626; }
+  .status-pending { background: rgba(245,158,11,0.12); color: #D97706; }
 }
 
 @keyframes auth-float-1 {
@@ -116,4 +97,16 @@
 @keyframes auth-pulse-glow {
   0%, 100% { opacity: 0.04; }
   50% { opacity: 0.08; }
+}
+@keyframes lp-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@keyframes lp-floatCard {
+  0%, 100% { transform: translateY(-50%) translateY(0); }
+  50% { transform: translateY(-50%) translateY(-12px); }
+}
+@keyframes lp-fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
 }
