@@ -11,6 +11,7 @@ import ComplaintsPage from "@/pages/ComplaintsPage";
 import InventoryPage from "@/pages/InventoryPage";
 import ProfilePage from "@/pages/ProfilePage";
 import AuthPage from "@/pages/AuthPage";
+import LandingPage from "@/pages/LandingPage";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
