@@ -69,9 +69,9 @@ const DashboardPage = () => {
   const reopenRate = totalFeedback > 0 ? ((totalReopened / totalFeedback) * 100).toFixed(1) : "0";
 
   const statCards = [
-    { label: "Total Complaints", value: stats.total, icon: FileText, color: "#65A30D" },
+    { label: "Total Complaints", value: stats.total, icon: FileText, color: "#76B041" },
     { label: "Open", value: stats.open, icon: AlertCircle, color: "#7C3AED" },
-    { label: "In Progress", value: stats.inProgress, icon: Clock, color: "#65A30D" },
+    { label: "In Progress", value: stats.inProgress, icon: Clock, color: "#76B041" },
     { label: "Resolved", value: stats.resolved, icon: CheckCircle2, color: "#16A34A" },
     { label: "Completed", value: stats.completed, icon: XCircle, color: "#64748B" },
     { label: "Critical/Urgent", value: stats.critical, icon: TrendingUp, color: "#DC2626" },
@@ -89,7 +89,7 @@ const DashboardPage = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold" style={{ color: '#0F1F17' }}>CATI E&M Dashboard</h2>
+        <h2 className="text-2xl font-bold" style={{ color: '#1C1F1A' }}>CATI E&M Dashboard</h2>
         <p style={{ color: '#64748B' }}>
           {isTechnician && !isAdmin ? "Your assigned tasks overview" : "Overview of your complaint management system"}
         </p>
@@ -110,7 +110,7 @@ const DashboardPage = () => {
           <div
             key={stat.label}
             className="rounded-[10px] p-4"
-            style={{ background: '#FFFFFF', border: '1px solid #E4E8DD' }}
+            style={{ background: '#FFFFFF', border: '1px solid #D4DCCE' }}
           >
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs" style={{ color: '#64748B' }}>{stat.label}</p>
@@ -121,7 +121,7 @@ const DashboardPage = () => {
                 <stat.icon className="h-3.5 w-3.5" style={{ color: stat.color }} />
               </div>
             </div>
-            <p className="text-2xl font-bold" style={{ color: '#0F1F17' }}>{stat.value}</p>
+            <p className="text-2xl font-bold" style={{ color: '#1C1F1A' }}>{stat.value}</p>
           </div>
         ))}
       </div>
@@ -133,7 +133,7 @@ const DashboardPage = () => {
             <div
               key={stat.label}
               className="rounded-[10px] p-4"
-              style={{ background: '#FFFFFF', border: '1px solid #E4E8DD' }}
+              style={{ background: '#FFFFFF', border: '1px solid #D4DCCE' }}
             >
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs" style={{ color: '#64748B' }}>{stat.label}</p>
@@ -144,16 +144,16 @@ const DashboardPage = () => {
                   <stat.icon className="h-3.5 w-3.5" style={{ color: stat.color }} />
                 </div>
               </div>
-              <p className="text-2xl font-bold" style={{ color: '#0F1F17' }}>{stat.value}</p>
+              <p className="text-2xl font-bold" style={{ color: '#1C1F1A' }}>{stat.value}</p>
             </div>
           ))}
         </div>
       )}
 
       {/* Recent Complaints */}
-      <div className="rounded-[10px]" style={{ background: '#FFFFFF', border: '1px solid #E4E8DD' }}>
+      <div className="rounded-[10px]" style={{ background: '#FFFFFF', border: '1px solid #D4DCCE' }}>
         <div className="p-5 pb-0">
-          <h3 className="text-base font-semibold" style={{ color: '#0F1F17' }}>Recent Complaints</h3>
+          <h3 className="text-base font-semibold" style={{ color: '#1C1F1A' }}>Recent Complaints</h3>
         </div>
         <div className="p-5">
           {recentComplaints.length === 0 ? (
@@ -203,14 +203,14 @@ const DashboardPage = () => {
 
       {/* Feedback Table (Admin only) */}
       {isAdmin && completedFeedback.length > 0 && (
-        <div className="rounded-[10px] overflow-hidden" style={{ background: '#FFFFFF', border: '1px solid #E4E8DD' }}>
+        <div className="rounded-[10px] overflow-hidden" style={{ background: '#FFFFFF', border: '1px solid #D4DCCE' }}>
           <div className="p-5 pb-0">
-            <h3 className="text-base font-semibold" style={{ color: '#0F1F17' }}>Feedback Overview</h3>
+            <h3 className="text-base font-semibold" style={{ color: '#1C1F1A' }}>Feedback Overview</h3>
           </div>
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow style={{ borderBottom: '1px solid #E4E8DD' }}>
+                <TableRow style={{ borderBottom: '1px solid #D4DCCE' }}>
                   <TableHead style={{ color: '#94A3B8' }}>Complaint</TableHead>
                   <TableHead style={{ color: '#94A3B8' }}>Technician</TableHead>
                   <TableHead style={{ color: '#94A3B8' }}>Rating</TableHead>

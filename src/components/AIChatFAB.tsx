@@ -12,15 +12,15 @@ const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-companion
 
 const CatiHexIcon = ({ size = 28 }: { size?: number }) => (
   <svg viewBox="0 0 120 120" width={size} height={size} xmlns="http://www.w3.org/2000/svg">
-    <path d="M101.6,84 L60,108 L18.4,84 L18.4,36 L60,12 L101.6,36 Z" fill="#65A30D" stroke="#65A30D" strokeWidth="2" strokeLinejoin="round"/>
-    <line x1="24" y1="60" x2="96" y2="60" stroke="#F7F8F4" strokeWidth="3"/>
-    <line x1="60" y1="20" x2="60" y2="100" stroke="#F7F8F4" strokeWidth="3"/>
-    <circle cx="60" cy="60" r="11" fill="#F7F8F4"/>
-    <circle cx="60" cy="60" r="5" fill="#65A30D"/>
-    <circle cx="24" cy="60" r="5" fill="#F7F8F4"/>
-    <circle cx="96" cy="60" r="5" fill="#F7F8F4"/>
-    <circle cx="60" cy="20" r="5" fill="#F7F8F4"/>
-    <circle cx="60" cy="100" r="5" fill="#F7F8F4"/>
+    <path d="M101.6,84 L60,108 L18.4,84 L18.4,36 L60,12 L101.6,36 Z" fill="#76B041" stroke="#76B041" strokeWidth="2" strokeLinejoin="round"/>
+    <line x1="24" y1="60" x2="96" y2="60" stroke="#F5F6F0" strokeWidth="3"/>
+    <line x1="60" y1="20" x2="60" y2="100" stroke="#F5F6F0" strokeWidth="3"/>
+    <circle cx="60" cy="60" r="11" fill="#F5F6F0"/>
+    <circle cx="60" cy="60" r="5" fill="#76B041"/>
+    <circle cx="24" cy="60" r="5" fill="#F5F6F0"/>
+    <circle cx="96" cy="60" r="5" fill="#F5F6F0"/>
+    <circle cx="60" cy="20" r="5" fill="#F5F6F0"/>
+    <circle cx="60" cy="100" r="5" fill="#F5F6F0"/>
   </svg>
 );
 
@@ -153,7 +153,7 @@ const AIChatFAB = ({ userRole }: AIChatFABProps) => {
             maxHeight: "calc(100vh - 120px)",
             maxWidth: "calc(100vw - 32px)",
             background: "#FFFFFF",
-            border: "1px solid #E4E8DD",
+            border: "1px solid #D4DCCE",
             borderRadius: 14,
             boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
           }}
@@ -161,14 +161,14 @@ const AIChatFAB = ({ userRole }: AIChatFABProps) => {
           {/* Header */}
           <div
             className="flex items-center justify-between px-4 shrink-0"
-            style={{ height: 52, background: "#0F2A1E", borderBottom: "1px solid #E4E8DD" }}
+            style={{ height: 52, background: "#1A4731", borderBottom: "1px solid #D4DCCE" }}
           >
             <div className="flex items-center gap-2">
-              <Sparkles className="h-4 w-4" style={{ color: "#65A30D" }} />
-              <span className="text-sm font-semibold" style={{ color: "#0F1F17" }}>AI Assistant</span>
+              <Sparkles className="h-4 w-4" style={{ color: "#76B041" }} />
+              <span className="text-sm font-semibold" style={{ color: "#1C1F1A" }}>AI Assistant</span>
               <span
                 className="text-[10px] font-medium px-1.5 py-0.5 rounded"
-                style={{ background: "rgba(101,163,13,0.12)", color: "#65A30D" }}
+                style={{ background: "rgba(101,163,13,0.12)", color: "#76B041" }}
               >
                 AI
               </span>
@@ -199,13 +199,13 @@ const AIChatFAB = ({ userRole }: AIChatFABProps) => {
                   className="max-w-[85%] px-3 py-2 rounded-xl text-sm leading-relaxed"
                   style={{
                     background: m.role === "user" ? "rgba(101,163,13,0.12)" : "#EDF1E6",
-                    color: "#0F1F17",
+                    color: "#1C1F1A",
                     borderBottomRightRadius: m.role === "user" ? 4 : undefined,
                     borderBottomLeftRadius: m.role === "assistant" ? 4 : undefined,
                   }}
                 >
                   {m.role === "assistant" ? (
-                    <div className="prose prose-invert prose-sm max-w-none [&_p]:mb-1.5 [&_ul]:mb-1.5 [&_li]:mb-0.5 [&_strong]:text-[#65A30D]">
+                    <div className="prose prose-invert prose-sm max-w-none [&_p]:mb-1.5 [&_ul]:mb-1.5 [&_li]:mb-0.5 [&_strong]:text-[#76B041]">
                       <ReactMarkdown>{m.content}</ReactMarkdown>
                     </div>
                   ) : (
@@ -228,7 +228,7 @@ const AIChatFAB = ({ userRole }: AIChatFABProps) => {
           <div className="shrink-0 px-3 pb-3 pt-1">
             <div
               className="flex items-center gap-2 rounded-xl px-3"
-              style={{ background: "#FFFFFF", border: "1px solid #E4E8DD" }}
+              style={{ background: "#FFFFFF", border: "1px solid #D4DCCE" }}
             >
               <input
                 type="text"
@@ -237,14 +237,14 @@ const AIChatFAB = ({ userRole }: AIChatFABProps) => {
                 onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && send()}
                 placeholder="Ask something…"
                 className="flex-1 bg-transparent py-2.5 text-sm outline-none"
-                style={{ color: "#0F1F17" }}
+                style={{ color: "#1C1F1A" }}
                 disabled={loading}
               />
               <button
                 onClick={send}
                 disabled={loading || !input.trim()}
                 className="p-1.5 rounded-lg transition-colors disabled:opacity-30"
-                style={{ background: "#65A30D", color: "#F7F8F4" }}
+                style={{ background: "#76B041", color: "#F5F6F0" }}
               >
                 <Send className="h-4 w-4" />
               </button>
@@ -261,15 +261,15 @@ const AIChatFAB = ({ userRole }: AIChatFABProps) => {
             bottom: 86,
             right: 24,
             background: "#EDF1E6",
-            border: "1px solid #E4E8DD",
+            border: "1px solid #D4DCCE",
             boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
           }}
           onClick={() => { setOpen(true); setShowTooltip(false); }}
         >
-          <span className="text-xs font-medium" style={{ color: "#0F1F17" }}>Need Help?</span>
+          <span className="text-xs font-medium" style={{ color: "#1C1F1A" }}>Need Help?</span>
           <span
             className="text-[9px] font-bold px-1 py-0.5 rounded"
-            style={{ background: "rgba(101,163,13,0.15)", color: "#65A30D" }}
+            style={{ background: "rgba(101,163,13,0.15)", color: "#76B041" }}
           >
             AI
           </span>
@@ -288,18 +288,18 @@ const AIChatFAB = ({ userRole }: AIChatFABProps) => {
           width: 52,
           height: 52,
           background: open ? "#EDF1E6" : "#FFFFFF",
-          border: "2px solid #65A30D",
+          border: "2px solid #76B041",
           boxShadow: "0 4px 24px rgba(101,163,13,0.25)",
         }}
       >
         {open ? (
-          <X className="h-5 w-5" style={{ color: "#65A30D" }} />
+          <X className="h-5 w-5" style={{ color: "#76B041" }} />
         ) : (
           <div className="relative">
             <CatiHexIcon size={26} />
             <Sparkles
               className="absolute -top-1 -right-1 h-3 w-3"
-              style={{ color: "#65A30D", filter: "drop-shadow(0 0 3px rgba(101,163,13,0.5))" }}
+              style={{ color: "#76B041", filter: "drop-shadow(0 0 3px rgba(101,163,13,0.5))" }}
             />
           </div>
         )}

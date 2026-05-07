@@ -25,18 +25,18 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   ];
 
   return (
-    <div className="min-h-screen flex" style={{ background: '#F7F8F4' }}>
+    <div className="min-h-screen flex" style={{ background: '#F5F6F0' }}>
       {/* Slim Icon Sidebar */}
       <aside
         className={`fixed inset-y-0 left-0 z-50 w-[180px] flex flex-col py-4 transition-transform duration-200 lg:translate-x-0 lg:static ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        style={{ background: '#0F2A1E', borderRight: '1px solid #E4E8DD' }}
+        style={{ background: '#1A4731', borderRight: '1px solid #D4DCCE' }}
       >
         {/* Logo */}
         <div className="mb-6 px-4 flex items-center gap-2">
           <CatiLogo size={28} variant="light" />
-          <span className="text-sm font-semibold tracking-wide" style={{ color: '#F7F8F4' }}>E&amp;M CMS</span>
+          <span className="text-sm font-semibold tracking-wide" style={{ color: '#F5F6F0' }}>E&amp;M CMS</span>
         </div>
 
         {/* Nav Items */}
@@ -51,7 +51,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
                 className="flex items-center gap-3 px-3 h-10 rounded-lg transition-colors text-sm font-medium"
                 style={{
                   background: active ? 'rgba(190,242,100,0.15)' : 'transparent',
-                  color: active ? '#BEF264' : '#94A3B8',
+                  color: active ? '#9CCC4A' : '#94A3B8',
                 }}
               >
                 <item.icon className="h-5 w-5 shrink-0" />
@@ -98,7 +98,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           style={{
             height: '54px',
             background: '#FFFFFF',
-            borderBottom: '1px solid #E4E8DD',
+            borderBottom: '1px solid #D4DCCE',
           }}
         >
           <Button
@@ -113,7 +113,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 
           {/* Brand text */}
           <div className="flex items-center gap-2 mr-4">
-            <span className="text-sm font-semibold hidden lg:inline" style={{ color: '#0F1F17' }}>E&M CMS</span>
+            <span className="text-sm font-semibold hidden lg:inline" style={{ color: '#1C1F1A' }}>E&M CMS</span>
           </div>
 
           {/* Search bar (center) */}
@@ -126,15 +126,15 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
                 className="w-full h-9 pl-9 pr-4 text-sm rounded-[7px] outline-none transition-all duration-200"
                 style={{
                   background: '#FFFFFF',
-                  border: '1px solid #E4E8DD',
-                  color: '#0F1F17',
+                  border: '1px solid #D4DCCE',
+                  color: '#1C1F1A',
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = '#65A30D';
+                  e.currentTarget.style.borderColor = '#76B041';
                   e.currentTarget.style.boxShadow = '0 0 0 3px rgba(101,163,13,0.15)';
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = '#E4E8DD';
+                  e.currentTarget.style.borderColor = '#D4DCCE';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               />
@@ -146,7 +146,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
             {showBell && <NotificationBell />}
             <div
               className="h-8 w-8 rounded-full flex items-center justify-center text-xs font-semibold"
-              style={{ background: 'rgba(101,163,13,0.15)', color: '#65A30D' }}
+              style={{ background: 'rgba(101,163,13,0.15)', color: '#76B041' }}
             >
               {user?.email?.charAt(0).toUpperCase()}
             </div>
