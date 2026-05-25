@@ -310,6 +310,8 @@ const ComplaintsPage = () => {
 
   return (
     <div className="space-y-6">
+      <PageHead title="Complaints — CATI E&M CMS" description="Create, assign, and track facility complaints across CATI Hyderabad locations. Filter by status, priority, and assignee." path="/complaints" />
+
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-foreground">Complaints</h1>

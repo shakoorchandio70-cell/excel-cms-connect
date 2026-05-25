@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { Loader2, User } from "lucide-react";
+import PageHead from "@/components/PageHead";
+
 
 const ProfilePage = () => {
   const { user } = useAuth();
@@ -55,10 +57,12 @@ const ProfilePage = () => {
 
   return (
     <div className="max-w-lg mx-auto space-y-6">
+      <PageHead title="Profile Settings — CATI E&M CMS" description="Update your contact details and notification preferences for the CATI E&M complaint management system." path="/profile" />
       <div>
-        <h2 className="text-2xl font-bold" style={{ color: '#1C1F1A' }}>Profile Settings</h2>
+        <h1 className="text-2xl font-bold" style={{ color: '#1C1F1A' }}>Profile Settings</h1>
         <p style={{ color: '#64748B' }}>Manage your account details</p>
       </div>
+
 
       <div className="rounded-[10px] p-6" style={{ background: '#FFFFFF', border: '1px solid #D4DCCE' }}>
         <div className="flex items-center gap-2 mb-5">
