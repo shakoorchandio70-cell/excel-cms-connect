@@ -4,6 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Mail, Lock, ArrowRight, ShieldCheck } from "lucide-react";
 import { CatiLogo } from "@/components/BrandLogo";
+import PageHead from "@/components/PageHead";
+
 
 const AuthPage = () => {
   const navigate = useNavigate();
@@ -29,6 +31,8 @@ const AuthPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden" style={{ background: '#F5F6F0' }}>
+      <PageHead title="Sign In — CATI E&M CMS" description="Secure staff sign-in for the CATI Hyderabad E&M Section complaint management system." path="/auth" />
+
       {/* Gradient blobs */}
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 50% at 15% 20%, rgba(101,163,13,0.05) 0%, transparent 70%)', animation: 'auth-pulse-glow 8s ease-in-out infinite' }} />
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 60% at 85% 80%, rgba(45,106,79,0.04) 0%, transparent 70%)', animation: 'auth-pulse-glow 8s ease-in-out infinite 4s' }} />
@@ -60,19 +64,21 @@ const AuthPage = () => {
             </div>
           </div>
 
-          <h2 className="text-xl font-semibold mb-1" style={{ color: '#1C1F1A' }}>
+          <h1 className="text-xl font-semibold mb-1" style={{ color: '#1C1F1A' }}>
             Sign in to your account
-          </h2>
+          </h1>
           <p className="text-sm mb-7" style={{ color: '#64748B' }}>
             Access your dashboard securely
           </p>
 
+
           <form onSubmit={handleLogin} className="space-y-5">
             <div className="space-y-1.5">
-              <label className="text-xs font-medium" style={{ color: '#64748B' }}>Email Address</label>
+              <label htmlFor="login-email" className="text-xs font-medium block" style={{ color: '#64748B' }}>Email Address</label>
               <div className="relative">
                 <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-[18px] w-[18px]" style={{ color: '#94A3B8' }} />
                 <input
+                  id="login-email"
                   type="email"
                   value={loginEmail}
                   onChange={(e) => setLoginEmail(e.target.value)}
@@ -86,11 +92,13 @@ const AuthPage = () => {
               </div>
             </div>
 
+
             <div className="space-y-1.5">
-              <label className="text-xs font-medium" style={{ color: '#64748B' }}>Password</label>
+              <label htmlFor="login-password" className="text-xs font-medium block" style={{ color: '#64748B' }}>Password</label>
               <div className="relative">
                 <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-[18px] w-[18px]" style={{ color: '#94A3B8' }} />
                 <input
+                  id="login-password"
                   type="password"
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
@@ -103,6 +111,7 @@ const AuthPage = () => {
                 />
               </div>
             </div>
+
 
             <div className="flex justify-end">
               <button type="button" className="text-xs font-medium hover:underline" style={{ color: '#76B041' }}>
