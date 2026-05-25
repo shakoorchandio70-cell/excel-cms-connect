@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { Loader2, User } from "lucide-react";
+import PageHead from "@/components/PageHead";
+
 
 const ProfilePage = () => {
   const { user } = useAuth();
@@ -55,10 +57,12 @@ const ProfilePage = () => {
 
   return (
     <div className="max-w-lg mx-auto space-y-6">
+      <PageHead title="Profile Settings — CATI E&M CMS" description="Update your contact details and notification preferences for the CATI E&M complaint management system." path="/profile" />
       <div>
-        <h2 className="text-2xl font-bold" style={{ color: '#1C1F1A' }}>Profile Settings</h2>
+        <h1 className="text-2xl font-bold" style={{ color: '#1C1F1A' }}>Profile Settings</h1>
         <p style={{ color: '#64748B' }}>Manage your account details</p>
       </div>
+
 
       <div className="rounded-[10px] p-6" style={{ background: '#FFFFFF', border: '1px solid #D4DCCE' }}>
         <div className="flex items-center gap-2 mb-5">
@@ -68,21 +72,23 @@ const ProfilePage = () => {
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label style={{ color: '#475569' }}>Full Name</Label>
+            <Label htmlFor="profile-full-name" style={{ color: '#475569' }}>Full Name</Label>
             <Input
+              id="profile-full-name"
               value={form.full_name}
               onChange={(e) => setForm({ ...form, full_name: e.target.value })}
               style={{ background: '#FFFFFF', border: '1px solid #D4DCCE', color: '#1C1F1A', borderRadius: '7px' }}
             />
           </div>
           <div className="space-y-2">
-            <Label style={{ color: '#475569' }}>Login ID</Label>
-            <Input value={user?.email || ""} disabled style={{ background: '#1A4731', border: '1px solid #D4DCCE', color: '#64748B', borderRadius: '7px' }} />
+            <Label htmlFor="profile-login-id" style={{ color: '#475569' }}>Login ID</Label>
+            <Input id="profile-login-id" value={user?.email || ""} disabled style={{ background: '#1A4731', border: '1px solid #D4DCCE', color: '#64748B', borderRadius: '7px' }} />
           </div>
 
           <div className="space-y-2">
-            <Label style={{ color: '#475569' }}>Email Address</Label>
+            <Label htmlFor="profile-email" style={{ color: '#475569' }}>Email Address</Label>
             <Input
+              id="profile-email"
               type="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -94,20 +100,22 @@ const ProfilePage = () => {
 
           <div className="flex items-center justify-between rounded-lg p-3" style={{ border: '1px solid #D4DCCE' }}>
             <div className="space-y-0.5">
-              <Label className="text-sm font-medium" style={{ color: '#1C1F1A' }}>Email Notifications</Label>
+              <Label htmlFor="profile-email-notifications" className="text-sm font-medium" style={{ color: '#1C1F1A' }}>Email Notifications</Label>
               <p className="text-xs" style={{ color: '#94A3B8' }}>
                 Receive email notifications for complaint updates and assignments
               </p>
             </div>
             <Switch
+              id="profile-email-notifications"
               checked={form.email_notifications}
               onCheckedChange={(checked) => setForm({ ...form, email_notifications: checked })}
             />
           </div>
 
           <div className="space-y-2">
-            <Label style={{ color: '#475569' }}>Mobile Number</Label>
+            <Label htmlFor="profile-mobile" style={{ color: '#475569' }}>Mobile Number</Label>
             <Input
+              id="profile-mobile"
               value={form.mobile_number}
               onChange={(e) => setForm({ ...form, mobile_number: e.target.value })}
               placeholder="+92 3XX XXXXXXX (include country code)"
@@ -118,8 +126,9 @@ const ProfilePage = () => {
 
           {isAdmin && (
             <div className="space-y-2">
-              <Label style={{ color: '#475569' }}>Daily Alert Time</Label>
+              <Label htmlFor="profile-daily-alert-time" style={{ color: '#475569' }}>Daily Alert Time</Label>
               <Input
+                id="profile-daily-alert-time"
                 type="time"
                 value={form.daily_alert_time}
                 onChange={(e) => setForm({ ...form, daily_alert_time: e.target.value })}
@@ -128,6 +137,7 @@ const ProfilePage = () => {
               <p className="text-xs" style={{ color: '#94A3B8' }}>Daily low stock summary will be sent at this time</p>
             </div>
           )}
+
 
           <Button
             onClick={handleSave}

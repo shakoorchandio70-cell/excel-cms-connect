@@ -7,6 +7,8 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import StarRating from "@/components/StarRating";
 import { useUserRole } from "@/hooks/useUserRole";
 import { useAuth } from "@/contexts/AuthContext";
+import PageHead from "@/components/PageHead";
+
 
 const DashboardPage = () => {
   const { user } = useAuth();
@@ -88,12 +90,14 @@ const DashboardPage = () => {
 
   return (
     <div className="space-y-6">
+      <PageHead title="Dashboard — CATI E&M CMS" description="Overview of complaints, assignments, and resolution metrics for the CATI Hyderabad E&M Section." path="/dashboard" />
       <div>
-        <h2 className="text-2xl font-bold" style={{ color: '#1C1F1A' }}>CATI E&M Dashboard</h2>
+        <h1 className="text-2xl font-bold" style={{ color: '#1C1F1A' }}>CATI E&M Dashboard</h1>
         <p style={{ color: '#64748B' }}>
           {isTechnician && !isAdmin ? "Your assigned tasks overview" : "Overview of your complaint management system"}
         </p>
       </div>
+
 
       {isAdmin && (
         <Alert style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)' }}>

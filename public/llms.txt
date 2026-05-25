@@ -1,0 +1,8 @@
+# CATI E&M CMS
+
+> Internal complaint management platform for the Civil Aviation Training Institute (CATI) Hyderabad — Electrical & Mechanical Section. Tracks facility complaints across locations with role-based dashboards for admins, technicians, and officials.
+
+## Pages
+
+- [Home](/): Overview of the CATI E&M CMS — features, workflow, and access roles.
+- [Sign In](/auth): Secure sign-in for CATI staff. Public registration is disabled.

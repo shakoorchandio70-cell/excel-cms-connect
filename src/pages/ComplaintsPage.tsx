@@ -19,6 +19,8 @@ import EditComplaintModal from "@/components/EditComplaintModal";
 import UpdateStatusModal from "@/components/UpdateStatusModal";
 import ResolutionCard from "@/components/ResolutionCard";
 import FeedbackViewModal from "@/components/FeedbackViewModal";
+import PageHead from "@/components/PageHead";
+
 
 const CATEGORIES = [
   "Bulb / lighting fault", "Fan replacement", "Short circuit",
@@ -308,9 +310,11 @@ const ComplaintsPage = () => {
 
   return (
     <div className="space-y-6">
+      <PageHead title="Complaints — CATI E&M CMS" description="Create, assign, and track facility complaints across CATI Hyderabad locations. Filter by status, priority, and assignee." path="/complaints" />
+
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-foreground">Complaints</h2>
+          <h1 className="text-2xl font-bold text-foreground">Complaints</h1>
           <p className="text-muted-foreground">
             {isTechnician && !isAdmin ? "Your assigned tasks" : "Manage and track all complaints"}
           </p>
@@ -346,8 +350,10 @@ const ComplaintsPage = () => {
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="Search complaints..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
+          <label htmlFor="complaints-search" className="sr-only">Search complaints</label>
+          <Input id="complaints-search" placeholder="Search complaints..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" aria-label="Search complaints" />
         </div>
+
         <Select value={statusFilter} onValueChange={setStatusFilter}>
           <SelectTrigger className="w-full sm:w-[180px]">
             <Filter className="h-4 w-4 mr-2" /><SelectValue />
@@ -390,9 +396,10 @@ const ComplaintsPage = () => {
                       <TableRow key={c.id} className={c.status === "Reopened" ? "bg-destructive/5" : ""}>
                         <TableCell>
                           {c.status === "Reopened" && c.reopen_count > 0 && (
-                            <button onClick={() => setExpandedRow(expandedRow === c.id ? null : c.id)}>
+                            <button onClick={() => setExpandedRow(expandedRow === c.id ? null : c.id)} aria-label={expandedRow === c.id ? "Collapse row" : "Expand row"} aria-expanded={expandedRow === c.id}>
                               {expandedRow === c.id ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
                             </button>
+
                           )}
                         </TableCell>
                         <TableCell className="font-mono text-xs text-muted-foreground">{c.complaint_number}</TableCell>

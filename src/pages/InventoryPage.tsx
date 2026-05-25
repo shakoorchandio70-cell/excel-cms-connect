@@ -19,6 +19,8 @@ import { toast } from "sonner";
 import { Plus, Package, Search, Edit, CalendarIcon, AlertTriangle, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import PageHead from "@/components/PageHead";
+
 
 const UNITS = ["Pcs", "Meters", "Kg", "Rolls", "Sets"];
 
@@ -77,11 +79,13 @@ const InventoryPage = () => {
 
   return (
     <div className="space-y-6">
+      <PageHead title="Inventory — CATI E&M CMS" description="Track spare-parts inventory, consumption logs, and low-stock alerts for CATI Hyderabad E&M operations." path="/inventory" />
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-foreground">Inventory Management</h2>
+          <h1 className="text-2xl font-bold text-foreground">Inventory Management</h1>
           <p className="text-muted-foreground">Track stock levels and consumption</p>
         </div>
+
         {isAdmin && (
           <div className="flex gap-2">
             <Button size="sm" onClick={() => setAddItemOpen(true)}>
@@ -121,8 +125,10 @@ const InventoryPage = () => {
         <TabsContent value="inventory" className="space-y-4">
           <div className="relative max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input placeholder="Search items..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
+            <label htmlFor="inventory-search" className="sr-only">Search items</label>
+            <Input id="inventory-search" placeholder="Search items..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" aria-label="Search inventory items" />
           </div>
+
 
           <Card>
             <CardContent className="p-0">

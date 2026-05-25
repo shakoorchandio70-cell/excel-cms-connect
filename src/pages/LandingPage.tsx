@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowDown, Lock, Zap, Activity, ShieldCheck, Package, Mail, BarChart3, Crown, ClipboardList, Wrench } from "lucide-react";
 import { CatiLogo } from "@/components/BrandLogo";
+import PageHead from "@/components/PageHead";
+
 
 const C = {
   greenDark: "#1A4731",
@@ -28,6 +30,8 @@ const SectionLabel = ({ children, center = false, dark = false }: { children: Re
 const LandingPage = () => {
   return (
     <div style={{ background: C.cream, color: C.charcoal, fontFamily: "'DM Sans', sans-serif" }}>
+      <PageHead title="CATI E&M CMS — Complaint Management for Hyderabad" description="Internal complaint management platform for the CATI Hyderabad E&M Section. Track, assign, and resolve facility complaints with role-based dashboards." path="/" />
+
       {/* NAV */}
       <nav
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12"
