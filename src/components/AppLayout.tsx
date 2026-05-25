@@ -107,7 +107,10 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
             className="lg:hidden mr-2"
             onClick={() => setSidebarOpen(!sidebarOpen)}
             style={{ color: '#475569' }}
+            aria-label={sidebarOpen ? "Close menu" : "Open menu"}
+            aria-expanded={sidebarOpen}
           >
+
             {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
 
@@ -120,9 +123,13 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           <div className="flex-1 max-w-md mx-auto hidden md:block">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: '#94A3B8' }} />
+              <label htmlFor="global-search" className="sr-only">Search</label>
               <input
+                id="global-search"
                 type="text"
                 placeholder="Search..."
+                aria-label="Search"
+
                 className="w-full h-9 pl-9 pr-4 text-sm rounded-[7px] outline-none transition-all duration-200"
                 style={{
                   background: '#FFFFFF',
